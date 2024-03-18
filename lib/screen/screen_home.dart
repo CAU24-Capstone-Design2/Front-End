@@ -11,7 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeState extends State<HomeScreen> {
-  final screen = 'home';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

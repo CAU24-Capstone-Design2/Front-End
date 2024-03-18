@@ -9,7 +9,6 @@ class MyinfoScreen extends StatefulWidget {
 }
 
 class MyinfoState extends State<MyinfoScreen> {
-  final screen = 'myinfo';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

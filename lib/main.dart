@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:scart/screen/screen_camera.dart';
 import 'package:scart/screen/screen_home.dart';
 import 'package:scart/screen/screen_myinfo.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/home': (context) => HomeScreen(),
-        // '/camera': (context) => CameraScreen(),
+        '/camera': (context) => CameraScreen(),
         '/myinfo': (context) => MyinfoScreen(),
       },
       initialRoute: '/home',
