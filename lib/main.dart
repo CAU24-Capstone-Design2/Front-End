@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:scart/screen/screen_home.dart';
+import 'package:scart/screen/screen_myinfo.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -17,9 +20,9 @@ class MyApp extends StatelessWidget {
       title: 'scart',
       debugShowCheckedModeBanner: false,
       routes: {
-        // '/home': (context) => HomeScreen(),
+        '/home': (context) => HomeScreen(),
         // '/camera': (context) => CameraScreen(),
-        // '/myinfo': (context) => MyinfoScreen(),
+        '/myinfo': (context) => MyinfoScreen(),
       },
       initialRoute: '/home',
       // home: MyAppPage(),
