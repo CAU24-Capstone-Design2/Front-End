@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:scart/screen/screen_camera.dart';
 import 'package:scart/screen/screen_home.dart';
 import 'package:scart/screen/screen_myinfo.dart';
+import 'package:scart/util/generateMaterialColor.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'scart',
       theme: ThemeData(
-          primarySwatch: buildMaterialColor(Color(0xff77A5FF)),
+          primarySwatch: generateMaterialColor(Color(0xff77A5FF)),
       ),
       debugShowCheckedModeBanner: false,
       routes: {
