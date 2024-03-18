@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'scart',
+      theme: ThemeData(
+          primarySwatch: buildMaterialColor(Color(0xff77A5FF)),
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         '/home': (context) => HomeScreen(),

@@ -41,7 +41,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             label: 'myinfo'),
       ],
       currentIndex: _selectedIndex,
-      selectedItemColor: Colors.purpleAccent,
+      selectedItemColor: Color(0xff77A5FF),
     );
   }
 }
