@@ -24,12 +24,18 @@ class HomeState extends State<HomeScreen> {
         child: CustomAppBar(),
       ),
       bottomNavigationBar: CustomNavBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: new FloatingActionButton(
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, '/home');
-        },
-        child: new Icon(Icons.add),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: SizedBox(
+        width: 70,
+        height: 70,
+        child: FittedBox(
+          child: new FloatingActionButton.large(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/home');
+            },
+            child: new Image.asset('lib/asset/floating_button.png',),
+          ),
+        ),
       ),
       body: ListView(
         children: [
@@ -63,10 +69,7 @@ class HomeState extends State<HomeScreen> {
             child: GestureDetector(
               onTap: () {
                 print('스타일 보기');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TattostyleScreen()),
-                );
+                Navigator.pushNamed(context, '/tattostyle');
               },
               child: Text('스타일 둘러보기 >',
                 textAlign: TextAlign.left,

@@ -9,23 +9,23 @@ class CustomNavBar extends StatefulWidget {
 
 class _CustomNavBarState extends State<CustomNavBar> {
   // 하단 네비게이션바 인덱스
-  static int _selectedIndex = 3;
+  static int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Color(0xff558FFF)))
+        border: Border(top: BorderSide(color: Color(0xff77A5FF), width: 1.0))
       ),
       child: BottomNavigationBar(
         onTap: (int index) => setState(() {
           _selectedIndex = index;
           switch (index) {
             case 0:
-              Navigator.pushReplacementNamed(context, '/camera');
+              Navigator.pushNamed(context, '/camera');
               break;
             case 1:
-              Navigator.pushReplacementNamed(context, '/myinfo');
+              Navigator.pushNamed(context, '/myinfo');
               break;
             default:
           }
@@ -39,7 +39,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
               label: 'Mypage'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xff77A5FF),
+        selectedItemColor: Colors.black54,
       ),
     );
   }

@@ -19,11 +19,17 @@ class MyinfoState extends State<MyinfoScreen> {
       ),
       bottomNavigationBar: CustomNavBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: new FloatingActionButton(
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, '/home');
-        },
-        child: new Icon(Icons.add),
+      floatingActionButton: SizedBox(
+        width: 70,
+        height: 70,
+        child: FittedBox(
+          child: new FloatingActionButton.large(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/home');
+            },
+            child: new Image.asset('lib/asset/floating_button.png',),
+          ),
+        ),
       ),
       body: Center(
         child: Text('myinfo page'),
