@@ -106,7 +106,7 @@ flutter_native_splash:
      color: "#D8E5FF"
 
 flutter_icons:
-  image_path: "lib/asset/ScArt.png"
+  image_path: "lib/asset/icon.png"
   android: true
   background_color: "D8E5FF"
 
