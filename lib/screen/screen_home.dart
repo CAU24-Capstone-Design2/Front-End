@@ -36,29 +36,47 @@ class HomeState extends State<HomeScreen> {
                   fontWeight: FontWeight.bold
               ),),
           ),
-          SingleChildScrollView( // Row vs. SingleChildScrollView : 스크롤 가능
+          Center(
+            child: SingleChildScrollView( // Row vs. SingleChildScrollView : 스크롤 가능
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.all(2),
             child: Row(
               children: [
-                Icon(Icons.insert_photo, size: 180),
-                Icon(Icons.insert_photo, size: 180),
-                Icon(Icons.insert_photo, size: 180),
+                Icon(Icons.insert_photo, size: 160),
+                Icon(Icons.insert_photo, size: 160),
+                Icon(Icons.insert_photo, size: 160),
                 Icon(Icons.insert_photo, size: 180),
                 Icon(Icons.insert_photo, size: 180),
                 Icon(Icons.insert_photo, size: 180),
               ],
             ),
+          ),),
+          SizedBox(height: 30, width: double.infinity),
+          Container(
+            margin: EdgeInsets.only(left: 20),
+            child: GestureDetector(
+              onTap: () {
+                print('스타일 보기');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TattostyleScreen()),
+                );
+              },
+              child: Text('스타일 둘러보기 >',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              print('스타일 보기');
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TattostyleScreen()),
-              );
-            },
-            child: Text('스타일 둘러보기', style: TextStyle(fontSize: 20),),
+          GridView.builder(
+            physics: ScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemCount: 20,
+            itemBuilder: (context, index) =>
+                Icon(Icons.insert_photo, size: 160),
           ),
         ],
       ),

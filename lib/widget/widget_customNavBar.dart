@@ -31,14 +31,14 @@ class _CustomNavBarState extends State<CustomNavBar> {
       }),
       items: const [
         BottomNavigationBarItem(
-            icon: Icon(Icons.camera),
-            label: 'camera'),
+            icon: Icon(Icons.photo_camera),
+            label: 'Search'),
         BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'home'),
         BottomNavigationBarItem(
             icon: Icon(Icons.info),
-            label: 'myinfo'),
+            label: 'Mypage'),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: Color(0xff77A5FF),
