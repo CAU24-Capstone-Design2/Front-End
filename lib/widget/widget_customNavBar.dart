@@ -9,39 +9,38 @@ class CustomNavBar extends StatefulWidget {
 
 class _CustomNavBarState extends State<CustomNavBar> {
   // 하단 네비게이션바 인덱스
-  static int _selectedIndex = 1;
+  static int _selectedIndex = 3;
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      onTap: (int index) => setState(() {
-        _selectedIndex = index;
-        switch (index) {
-          case 0:
-            Navigator.pushReplacementNamed(context, '/camera');
-            break;
-          case 1:
-            Navigator.pushReplacementNamed(context, '/home');
-            break;
-          case 2:
-            Navigator.pushReplacementNamed(context, '/myinfo');
-            break;
-          default:
-        }
-      }),
-      items: const [
-        BottomNavigationBarItem(
-            icon: Icon(Icons.photo_camera),
-            label: 'Search'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'Mypage'),
-      ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: Color(0xff77A5FF),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: Color(0xff558FFF)))
+      ),
+      child: BottomNavigationBar(
+        onTap: (int index) => setState(() {
+          _selectedIndex = index;
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/camera');
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, '/myinfo');
+              break;
+            default:
+          }
+        }),
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.photo_camera),
+              label: 'Search'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.info),
+              label: 'Mypage'),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Color(0xff77A5FF),
+      ),
     );
   }
 }

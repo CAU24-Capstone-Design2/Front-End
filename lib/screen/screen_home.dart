@@ -24,6 +24,13 @@ class HomeState extends State<HomeScreen> {
         child: CustomAppBar(),
       ),
       bottomNavigationBar: CustomNavBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/home');
+        },
+        child: new Icon(Icons.add),
+      ),
       body: ListView(
         children: [
           SizedBox(height: 20, width: double.infinity),
