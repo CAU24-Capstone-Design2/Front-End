@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   lottie: ^1.4.2
   image_picker: ^0.8.5+3
+  flutter_native_splash: ^2.0.5
+  flutter_launcher_icons: ^0.11.0
 
 dev_dependencies:
   flutter_test:
@@ -89,3 +91,22 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  color: "#D8E5FF"
+  # background_image: "assets/background.png"
+  image: lib/asset/ScArt.png
+  android_gravity: fill
+  fullscreen: true
+  android12: true
+
+  android_12:
+     image: lib/asset/ScArt.png
+     icon_background_color: "#D8E5FF"
+     color: "#D8E5FF"
+
+flutter_icons:
+  image_path: "lib/asset/ScArt.png"
+  android: true
+  background_color: "D8E5FF"
+
