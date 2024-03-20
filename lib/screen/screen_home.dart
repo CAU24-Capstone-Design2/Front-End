@@ -32,7 +32,7 @@ class HomeState extends State<HomeScreen> {
           SizedBox(height: 20, width: double.infinity),
           Container(
             margin: EdgeInsets.only(left: 20),
-            child: Text('마이 타투 >',
+            child: Text('마이 타투',
               textAlign: TextAlign.left,
               style: TextStyle(
                   fontSize: 30,
@@ -76,8 +76,15 @@ class HomeState extends State<HomeScreen> {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemCount: 20,
             itemBuilder: (context, index) =>
-                Icon(Icons.insert_photo, size: 160),
-          ),
+                Container(
+                  width: 80,
+                  height: 80,
+                  margin: const EdgeInsets.all(15.0),
+                  decoration: BoxDecoration(
+                      color: Color(0xffEEF4FF),
+                      borderRadius: BorderRadius.circular(10.0)
+                  ),
+                ),          ),
         ],
       ),
     );
