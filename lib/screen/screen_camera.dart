@@ -14,6 +14,7 @@ class CameraScreen extends StatefulWidget {
 class CameraState extends State<CameraScreen> {
   XFile? _image;
   final ImagePicker picker = ImagePicker();
+  final tattoController = TextEditingController();
 
   // 이미지 가져오는 함수
   Future getImage(ImageSource imageSource) async {
@@ -88,7 +89,7 @@ class CameraState extends State<CameraScreen> {
               _buildButton(),
             ],
           ),
-          SizedBox(height: 30, width: double.infinity),
+          SizedBox(height: 80, width: double.infinity),
           Container(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text('타투 도안의 스타일을 얘기해주세요 !',
@@ -101,15 +102,36 @@ class CameraState extends State<CameraScreen> {
           SizedBox(height: 80, width: double.infinity),
           Container(
             padding: const EdgeInsets.only(left: 20.0),
-            child: Text('타투 도안에 추가하고 싶은게 있나요 ?',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600
-              ),),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('타투 도안에 추가하고 싶은게 있나요 ?',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600
+                  ),),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0, right: 20.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        labelText: '원하는 스타일을 입력해주세요!',
+                        filled: true,
+                        fillColor: Color(0xffEEF4FF),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none
+                        )
+                    ),
+                    controller: tattoController,
+                  ),
+                )
+              ],
+            )
           ),
+          SizedBox(height: 80, width: double.infinity),
           IconButton(
               onPressed: () {
+                print(tattoController.text);
                 Navigator.pushReplacementNamed(context, '/home');
               },
               icon: Row(
