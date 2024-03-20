@@ -1,6 +1,6 @@
-# scart
+# ScArt (Scar + Art)
 
-A new Flutter project.
+CAU Capstone(2) project.
 
 ## Getting Started
 
