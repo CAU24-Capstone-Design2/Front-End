@@ -25,7 +25,7 @@ class HomeState extends State<HomeScreen> {
         child: CustomAppBar(),
       ),
       bottomNavigationBar: CustomNavBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: CustomHomeFAB(),
       body: ListView(
         children: [

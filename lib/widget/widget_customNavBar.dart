@@ -15,7 +15,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Color(0xff77A5FF), width: 1.0))
+        border: Border(top: BorderSide(color: Color(0xff77A5FF), width: 2.0))
       ),
       child: BottomNavigationBar(
         onTap: (int index) => setState(() {

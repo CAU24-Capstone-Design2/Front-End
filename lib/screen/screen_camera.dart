@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:scart/widget/widget_customAppBar.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -28,15 +29,101 @@ class CameraState extends State<CameraScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Camera'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(83.0),
+        child: CustomAppBar(),
       ),
       body: ListView( // ListView : 스크롤 가능 vs. Column
         children: [
+          SizedBox(height: 10, width: double.infinity),
+          Container(
+            margin: EdgeInsets.only(left: 20),
+            child: Row(
+              children: [
+                Text('흉터 사진을 촬영해주세요 !',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600
+                  ),),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('사진 찍는 방법'),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: <Widget>[
+                                  Text('1. 예시 문구'),
+                                  Text('2. 예시 문구'),
+                                ],
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('확인'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                    );
+                  },
+                  icon: Image.asset('lib/asset/Tip.png'),
+                ),
+              ],
+            ),
+          ),
           SizedBox(height: 30, width: double.infinity),
-          _buildPhotoArea(),
-          SizedBox(height: 20),
-          _buildButton(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildPhotoArea(),
+              SizedBox(width: 40),
+              _buildButton(),
+            ],
+          ),
+          SizedBox(height: 30, width: double.infinity),
+          Container(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Text('타투 도안의 스타일을 얘기해주세요 !',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600
+              ),),
+          ),
+          SizedBox(height: 80, width: double.infinity),
+          Container(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Text('타투 도안에 추가하고 싶은게 있나요 ?',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600
+              ),),
+          ),
+          IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/home');
+              },
+              icon: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text('완료',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600
+                      ),),
+                    Icon(Icons.arrow_forward)
+                  ],
+              ),
+          ),
         ],
       ),
     );
@@ -44,53 +131,46 @@ class CameraState extends State<CameraScreen> {
 
   Widget _buildPhotoArea() {
     return _image != null
-        ? Container(
-      width: 300,
-      height: 300,
-      child: Image.file(File(_image!.path)),
-    )
-        : Container(
-      width: 300,
-      height: 300,
-      color: Colors.grey,
-    );
+        ?
+        UnconstrainedBox(
+          child: Container(
+            width: 120,
+            height: 120,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.file(File(_image!.path),fit: BoxFit.cover,),
+            ),
+            decoration: BoxDecoration(
+                color: Color(0xffEEF4FF),
+                borderRadius: BorderRadius.circular(10.0)
+            ),
+          ),
+        )
+     :
+        UnconstrainedBox(
+          child: Container(
+            width: 120,
+            height: 120,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.add_a_photo, size: 30,),
+                SizedBox(height: 10, width: double.infinity),
+                Text('사진 추가'),
+              ],
+            ),
+            decoration: BoxDecoration(
+                color: Color(0xffEEF4FF),
+                borderRadius: BorderRadius.circular(10.0)
+            ),
+          ),
+        );
   }
 
   Widget _buildButton() {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Tips"),
-        IconButton(
-          onPressed: () {
-            showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('사진 찍는 방법'),
-                    content: SingleChildScrollView(
-                      child: ListBody(
-                        children: <Widget>[
-                          Text('1. 예시 문구'),
-                          Text('2. 예시 문구'),
-                        ],
-                      ),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text('확인'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                }
-            );
-          },
-          icon: Icon(Icons.help),
-        ),
         ElevatedButton(
           onPressed: () {
             getImage(ImageSource.camera);

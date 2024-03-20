@@ -65,6 +65,7 @@ flutter:
   assets:
     - lib/asset/appbar_logo.png
     - lib/asset/floating_button.png
+    - lib/asset/Tip.png
     - lib/asset/tatto/linework1.png
     - lib/asset/tatto/linework2.jpg
     - lib/asset/tatto/oldschool1.jpg
