@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
 
+import '../widget/widget_customhomeFAB.dart';
+
 class MyinfoScreen extends StatefulWidget {
   const MyinfoScreen({Key? key}) : super(key: key);
 
@@ -19,18 +21,7 @@ class MyinfoState extends State<MyinfoScreen> {
       ),
       bottomNavigationBar: CustomNavBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: SizedBox(
-        width: 70,
-        height: 70,
-        child: FittedBox(
-          child: new FloatingActionButton.large(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-            child: new Image.asset('lib/asset/floating_button.png',),
-          ),
-        ),
-      ),
+      floatingActionButton: CustomHomeFAB(),
       body: Center(
         child: Text('myinfo page'),
       ),

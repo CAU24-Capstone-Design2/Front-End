@@ -6,6 +6,7 @@ import 'package:scart/widget/widget_customNavBar.dart';
 import 'package:lottie/lottie.dart';
 
 import '../widget/widget_customAppBar.dart';
+import '../widget/widget_customhomeFAB.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -25,18 +26,7 @@ class HomeState extends State<HomeScreen> {
       ),
       bottomNavigationBar: CustomNavBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-      floatingActionButton: SizedBox(
-        width: 70,
-        height: 70,
-        child: FittedBox(
-          child: new FloatingActionButton.large(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-            child: new Image.asset('lib/asset/floating_button.png',),
-          ),
-        ),
-      ),
+      floatingActionButton: CustomHomeFAB(),
       body: ListView(
         children: [
           SizedBox(height: 20, width: double.infinity),
