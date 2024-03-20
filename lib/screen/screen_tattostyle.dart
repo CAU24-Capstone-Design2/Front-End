@@ -3,6 +3,9 @@ import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
 
 import '../widget/widget_customhomeFAB.dart';
+import '../widget/widget_tattostyleone.dart';
+import '../widget/widget_tattostylethree.dart';
+import '../widget/widget_tattostyletwo.dart';
 
 class TattostyleScreen extends StatefulWidget {
   const TattostyleScreen({Key? key}) : super(key: key);
@@ -51,13 +54,9 @@ class TattostyleState extends State<TattostyleScreen> {
             Expanded(
               child: TabBarView(
                 children: [
-                  GridView.builder(
-                    key: const PageStorageKey("Grid_View"),
-                    itemCount: 20,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-
-                    ),
-                  )
+                  TattostyleOne(),
+                  TattostyleTwo(),
+                  TattostyleThree(),
                 ],
               ),
             )
