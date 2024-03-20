@@ -38,15 +38,15 @@ class TattostyleState extends State<TattostyleScreen> {
               indicatorWeight: 3,
               tabs: [
                 Tab(
-                  text: '카테고리 1',
+                  text: '올드스쿨',
                   height: 50,
                 ),
                 Tab(
-                  text: '카테고리 2',
+                  text: '라인워크',
                   height: 50,
                 ),
                 Tab(
-                  text: '카테고리 3',
+                  text: '수채화',
                   height: 50,
                 ),
               ]

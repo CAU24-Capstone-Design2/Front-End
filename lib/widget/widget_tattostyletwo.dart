@@ -23,7 +23,7 @@ class TattostyleTwo extends StatelessWidget {
         SizedBox(height: 40, width: double.infinity),
         Container(
           margin: EdgeInsets.only(left: 20),
-          child: Text('스타일 둘러보기 >',
+          child: Text('스타일 둘러보기',
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 30,
@@ -36,8 +36,15 @@ class TattostyleTwo extends StatelessWidget {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemCount: 20,
           itemBuilder: (context, index) =>
-              Icon(Icons.insert_photo, size: 160),
-        ),
+              Container(
+                width: 100,
+                height: 100,
+                margin: const EdgeInsets.all(10.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.asset('lib/asset/tatto/linework1.png'),
+                ),
+              ),        ),
       ],
     );
   }
