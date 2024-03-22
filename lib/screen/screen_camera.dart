@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 
+import '../widget/widget_multiSelectChip.dart';
+
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
 
@@ -15,6 +17,14 @@ class CameraState extends State<CameraScreen> {
   XFile? _image;
   final ImagePicker picker = ImagePicker();
   final tattoController = TextEditingController();
+
+  List<String> tattostyleList = [
+    "올드스쿨",
+    "라인워크",
+    "수채화",
+  ];
+
+  List<String> selectedTattostyleList = [];
 
   // 이미지 가져오는 함수
   Future getImage(ImageSource imageSource) async {
@@ -35,7 +45,7 @@ class CameraState extends State<CameraScreen> {
         child: CustomAppBar(),
       ),
       body: ListView( // ListView : 스크롤 가능 vs. Column
-        children: [
+        children: <Widget>[
           SizedBox(height: 10, width: double.infinity),
           Container(
             margin: EdgeInsets.only(left: 20),
@@ -92,12 +102,26 @@ class CameraState extends State<CameraScreen> {
           SizedBox(height: 80, width: double.infinity),
           Container(
             padding: const EdgeInsets.only(left: 20.0),
-            child: Text('타투 도안의 스타일을 얘기해주세요 !',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600
-              ),),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('타투 도안의 스타일을 얘기해주세요 !',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600
+                  ),),
+                MultiSelectChip(
+                  tattostyleList,
+                  onSelectedChanged: (selectedList) {
+                    setState(() {
+                      selectedTattostyleList = selectedList;
+                    });
+                  },
+                  maxSelection: 3,
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 80, width: double.infinity),
           Container(
@@ -129,22 +153,26 @@ class CameraState extends State<CameraScreen> {
             )
           ),
           SizedBox(height: 80, width: double.infinity),
-          IconButton(
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
               onPressed: () {
                 print(tattoController.text);
+                print(selectedTattostyleList.join(','));
                 Navigator.pushReplacementNamed(context, '/home');
               },
               icon: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text('완료',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600
-                      ),),
-                    Icon(Icons.arrow_forward)
-                  ],
+                children: [
+                  Text('완료',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600
+                    ),),
+                  Icon(Icons.arrow_forward)
+                ],
               ),
+            ),
           ),
         ],
       ),
