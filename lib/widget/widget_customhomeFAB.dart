@@ -13,7 +13,7 @@ class CustomHomeFAB extends StatelessWidget {
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/home');
           },
-          child: new Image.asset('lib/asset/floating_button.png',),
+          child: new Image.asset('assets/floating_button.png',),
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:scart/util/generateMaterialColor.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 
 import '../widget/widget_multiSelectChip.dart';
@@ -44,7 +45,7 @@ class CameraState extends State<CameraScreen> {
         preferredSize: Size.fromHeight(83.0),
         child: CustomAppBar(),
       ),
-      body: ListView( // ListView : 스크롤 가능 vs. Column
+      body: ListView( // List// View : 스크롤 가능 vs. Column
         children: <Widget>[
           SizedBox(height: 10, width: double.infinity),
           Container(
@@ -64,12 +65,11 @@ class CameraState extends State<CameraScreen> {
                         barrierDismissible: false,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text('사진 찍는 방법'),
+                            title: const Text('사진 찍을 때 Tip !'),
                             content: SingleChildScrollView(
                               child: ListBody(
                                 children: <Widget>[
-                                  Text('1. 예시 문구'),
-                                  Text('2. 예시 문구'),
+                                  Text('사진은 그림자가 없는 환경에서 흉터를 잘 찍어주면 더 정확한 결과가 나와요 :)'),
                                 ],
                               ),
                             ),
@@ -85,7 +85,7 @@ class CameraState extends State<CameraScreen> {
                         }
                     );
                   },
-                  icon: Image.asset('lib/asset/Tip.png'),
+                  icon: Image.asset('assets/Tip.png'),
                 ),
               ],
             ),
@@ -99,7 +99,7 @@ class CameraState extends State<CameraScreen> {
               _buildButton(),
             ],
           ),
-          SizedBox(height: 80, width: double.infinity),
+          SizedBox(height: 100, width: double.infinity),
           Container(
             padding: const EdgeInsets.only(left: 20.0),
             child: Column(
@@ -123,7 +123,7 @@ class CameraState extends State<CameraScreen> {
               ],
             ),
           ),
-          SizedBox(height: 80, width: double.infinity),
+          SizedBox(height: 100, width: double.infinity),
           Container(
             padding: const EdgeInsets.only(left: 20.0),
             child: Column(
@@ -152,14 +152,14 @@ class CameraState extends State<CameraScreen> {
               ],
             )
           ),
-          SizedBox(height: 80, width: double.infinity),
+          SizedBox(height: 100, width: double.infinity),
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               onPressed: () {
                 print(tattoController.text);
                 print(selectedTattostyleList.join(','));
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/loading');
               },
               icon: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -222,13 +222,19 @@ class CameraState extends State<CameraScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Color(0xff9CBFFF)),
+          ),
           onPressed: () {
             getImage(ImageSource.camera);
           },
           child: Text('Camera'),
         ),
-        SizedBox(width: 30),
+        SizedBox(height: 30),
         ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Color(0xff9CBFFF)),
+          ),
           onPressed: () {
             getImage(ImageSource.gallery);
           },

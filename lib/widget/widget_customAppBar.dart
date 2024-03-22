@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget {
         title: Padding(
           padding: const EdgeInsets.only(left: 10, top: 30),
           child: Image.asset(
-            "lib/asset/appbar_logo.png", fit: BoxFit.fill, width: 100,
+            "assets/appbar_logo.png", fit: BoxFit.fill, width: 100,
           ),
         ),
       ),

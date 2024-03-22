@@ -42,7 +42,7 @@ class TattostyleThree extends StatelessWidget {
                 margin: const EdgeInsets.all(10.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset('lib/asset/tatto/watercolor1.jpg'),
+                  child: Image.asset('assets/tatto/watercolor1.jpg'),
                 ),
               ),        ),
       ],

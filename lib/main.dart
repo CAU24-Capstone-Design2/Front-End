@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scart/screen/screen_camera.dart';
 import 'package:scart/screen/screen_home.dart';
+import 'package:scart/screen/screen_loading.dart';
 import 'package:scart/screen/screen_myinfo.dart';
 import 'package:scart/screen/screen_tattostyle.dart';
 import 'package:scart/util/generateMaterialColor.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/camera': (context) => CameraScreen(),
         '/myinfo': (context) => MyinfoScreen(),
         '/tattostyle': (context) => TattostyleScreen(),
+        '/loading' : (context) => LoadingScreen(),
       },
       initialRoute: '/home',
       // home: MyAppPage(),
