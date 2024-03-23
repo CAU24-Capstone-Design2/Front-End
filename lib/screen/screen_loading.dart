@@ -9,7 +9,27 @@ class LoadingScreen extends StatefulWidget {
   State<LoadingScreen> createState() => LoadingState();
 }
 
-class LoadingState extends State<LoadingScreen> {
+class LoadingState extends State<LoadingScreen> with TickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(vsync: this);
+
+    new Future.delayed(
+      const Duration(seconds: 3),
+        () => Navigator.pushReplacementNamed(context, '/home')
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +75,18 @@ class LoadingState extends State<LoadingScreen> {
                     'https://lottie.host/80a8a735-14cf-4777-b7a0-876960039bcd/bMwGupgSH7.json',
                     repeat: true,
                     animate: true,
+                    controller: _controller,
+                    onLoaded: (composition) {
+                      _controller.addStatusListener((status) {
+                        if (status == AnimationStatus.dismissed)
+                          _controller.forward();
+                        else if (status == AnimationStatus.completed)
+                          _controller.reverse();
+                      });
+                      _controller
+                      ..duration = composition.duration
+                      ..forward();
+                    },
                     delegates: LottieDelegates(
                         values: [
                           ValueDelegate.color(
