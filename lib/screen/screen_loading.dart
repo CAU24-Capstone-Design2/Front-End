@@ -40,39 +40,45 @@ class LoadingState extends State<LoadingScreen> {
           fontSize: 20,
           fontWeight: FontWeight.w600
           ),),
-            SizedBox(height: 30, width: double.infinity),
-            SizedBox(
-            width: 300,
-            height: 300,
-            child: Lottie.network(
-              'https://lottie.host/80a8a735-14cf-4777-b7a0-876960039bcd/bMwGupgSH7.json',
-              repeat: true,
-              animate: true,
-              delegates: LottieDelegates(
-                values: [
-                  ValueDelegate.color(
-                    const ['**', 'Circle 1', '**'],
-                    value: Color(0xFF7755EC)
-                  ),
-                  ValueDelegate.color(
-                      const ['**', 'Circle 2', '**'],
-                      value: Color(0xFFA5ACB5)
-                  ),
-                  ValueDelegate.color(
-                      const ['**', 'Circle 3', '**'],
-                      value: Color(0xFF528CEF)
-                  ),
-                  ValueDelegate.color(
-                      const ['**', 'Circle 4', '**'],
-                      value: Color(0xFF4B2CEA)
-                  )
-                ]
-              )
-            ),
-          )
           ]
           ),
           ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 80, width: double.infinity),
+              SizedBox(
+                width: 200,
+                height: 200,
+                child: Lottie.network(
+                    'https://lottie.host/80a8a735-14cf-4777-b7a0-876960039bcd/bMwGupgSH7.json',
+                    repeat: true,
+                    animate: true,
+                    delegates: LottieDelegates(
+                        values: [
+                          ValueDelegate.color(
+                              const ['**', 'Circle 1', '**'],
+                              value: Color(0xFF7755EC)
+                          ),
+                          ValueDelegate.color(
+                              const ['**', 'Circle 2', '**'],
+                              value: Color(0xFFA5ACB5)
+                          ),
+                          ValueDelegate.color(
+                              const ['**', 'Circle 3', '**'],
+                              value: Color(0xFF528CEF)
+                          ),
+                          ValueDelegate.color(
+                              const ['**', 'Circle 4', '**'],
+                              value: Color(0xFF4B2CEA)
+                          )
+                        ]
+                    )
+                ),
+              )
+            ],
+          )
           ],
         )
     );
