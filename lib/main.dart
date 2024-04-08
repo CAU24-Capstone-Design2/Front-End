@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:scart/screen/screen_camera.dart';
 import 'package:scart/screen/screen_home.dart';
 import 'package:scart/screen/screen_loading.dart';
+import 'package:scart/screen/screen_login.dart';
 import 'package:scart/screen/screen_myinfo.dart';
 import 'package:scart/screen/screen_tattostyle.dart';
 import 'package:scart/util/generateMaterialColor.dart';
@@ -36,8 +37,9 @@ class MyApp extends StatelessWidget {
         '/myinfo': (context) => MyinfoScreen(),
         '/tattostyle': (context) => TattostyleScreen(),
         '/loading' : (context) => LoadingScreen(),
+        '/login' : (context) => LoginScreen(),
       },
-      initialRoute: '/home',
+      initialRoute: '/login',
       // home: MyAppPage(),
     );
   }
