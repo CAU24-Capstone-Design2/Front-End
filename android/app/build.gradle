@@ -25,6 +25,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def nativeappkey = properties.getProperty('NATIVE_APP_KEY') // Notice we get the property we the exact same name we wrote in the local.properties file
+
+
 android {
     compileSdkVersion flutter.compileSdkVersion
 
@@ -48,6 +53,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        manifestPlaceholders = [nativeappkey: nativeappkey]
     }
 
     buildTypes {

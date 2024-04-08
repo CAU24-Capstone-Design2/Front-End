@@ -6,11 +6,15 @@ import 'package:scart/screen/screen_loading.dart';
 import 'package:scart/screen/screen_myinfo.dart';
 import 'package:scart/screen/screen_tattostyle.dart';
 import 'package:scart/util/generateMaterialColor.dart';
+import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async{
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // status bar 투명색
   ));
+  await dotenv.load(fileName: '.env');
+  KakaoSdk.init(nativeAppKey: dotenv.env['NATIVE_APP_KEY']);
   runApp(const MyApp());
 }
 
