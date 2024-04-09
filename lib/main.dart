@@ -10,6 +10,7 @@ import 'package:scart/screen/screen_tattostyle.dart';
 import 'package:scart/util/generateMaterialColor.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:scart/util/kakaoController.dart';
 import 'package:scart/util/kakaoLoginApi.dart';
 
 void main() async{
@@ -17,7 +18,12 @@ void main() async{
     statusBarColor: Colors.transparent, // status bar 투명색
   ));
   await dotenv.load(fileName: '.env');
-  KakaoSdk.init(nativeAppKey: dotenv.env['NATIVE_APP_KEY']);
+  WidgetsFlutterBinding.ensureInitialized();
+
+  KakaoSdk.init(
+      nativeAppKey: dotenv.env['NATIVE_APP_KEY']);
+  print(await KakaoSdk.origin);
+
   runApp(const MyApp());
 }
 

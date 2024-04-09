@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:scart/util/kakaoController.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
 
@@ -29,15 +31,8 @@ class MyinfoState extends State<MyinfoScreen> {
           SizedBox(height: 10, width: double.infinity),
           Row(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Icon(Icons.account_circle, size: 100,),
-              ),
-              Text('김김김 님',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              ),)
+              _profile(),
+              _nickname(),
             ]
           ),
           SizedBox(height: 30, width: double.infinity),
@@ -71,4 +66,42 @@ class MyinfoState extends State<MyinfoScreen> {
       ),
     );
   }
+
+  Widget _profile() => Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      width: 100,
+      height: 100,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Consumer<UserController>(builder: (context, controller, child) {
+          final String? src = controller.user?.kakaoAccount?.profile?.thumbnailImageUrl;
+          // controller.user?.kakaoAccount?.profile?.thumbnailImageUrl
+          if (src != null) {
+            return Image.network(src, fit: BoxFit.cover);
+          } else {
+            return Container(
+              color: Colors.black,
+            );
+          }
+        }),
+      ),
+    ),
+  );
+
+  Widget _nickname() => Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Consumer<UserController>(builder: (context, controller, child) {
+      final String? name = controller.user?.kakaoAccount?.profile?.nickname;
+      // controller.user?.kakaoAccount?.profile?.nickname;
+      if (name != null) {
+        return Text(name + " 님");
+      } else {
+        return const Text("OOO 님");
+      }
+    }),
+  );
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:provider/provider.dart';
-import '../util/kakaoLoginApi.dart';
+import '../util/kakaoController.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -41,7 +41,8 @@ class LoginState extends State<LoginScreen> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: Consumer<UserController>(builder: (context, controller, child) {
-          final String? src = controller.user?.properties?["profile_image"];
+          final String? src = controller.user?.kakaoAccount?.profile?.thumbnailImageUrl;
+          // controller.user?.kakaoAccount?.profile?.thumbnailImageUrl
           if (src != null) {
             return Image.network(src, fit: BoxFit.cover);
           } else {
@@ -57,7 +58,8 @@ class LoginState extends State<LoginScreen> {
   Widget _nickname() => Padding(
     padding: const EdgeInsets.all(8.0),
     child: Consumer<UserController>(builder: (context, controller, child) {
-      final String? name = controller.user?.properties?["nickname"];
+      final String? name = controller.user?.kakaoAccount?.profile?.nickname;
+      // controller.user?.kakaoAccount?.profile?.nickname;
       if (name != null) {
         return Text(name);
       } else {
@@ -68,9 +70,20 @@ class LoginState extends State<LoginScreen> {
 
   Widget _loginButton() => Padding(
     padding: const EdgeInsets.all(8.0),
-    child: GestureDetector(
-      onTap: context.read<UserController>().kakaoLogin,
-      child: Image.asset("assets/images/kakao_login_medium_narrow.png"),
-    ),
+    child: Consumer<UserController>(builder: (context, controller, child) {
+      if (controller.user != null) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/home');
+            },
+            child: Image.asset("assets/kakao/kakao_login_medium_wide.png"),
+          );
+      } else {
+          return GestureDetector(
+          onTap: context.read<UserController>().kakaoLogin,
+          child: Image.asset("assets/kakao/kakao_login_medium_wide.png"),
+          );
+      }
+    },)
   );
 }
