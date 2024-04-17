@@ -76,7 +76,7 @@ class LoginState extends State<LoginScreen> {
             onTap: () {
               Navigator.pushReplacementNamed(context, '/home');
             },
-            child: Image.asset("assets/kakao/kakao_login_medium_wide.png"),
+            child: Image.asset("assets/startbar.png"),
           );
       } else {
           return GestureDetector(
