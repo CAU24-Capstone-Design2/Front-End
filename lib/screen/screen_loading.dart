@@ -71,43 +71,7 @@ class LoadingState extends State<LoadingScreen> with TickerProviderStateMixin {
               SizedBox(
                 width: 200,
                 height: 200,
-                child: Lottie.network(
-                    'https://lottie.host/80a8a735-14cf-4777-b7a0-876960039bcd/bMwGupgSH7.json',
-                    repeat: true,
-                    animate: true,
-                    controller: _controller,
-                    onLoaded: (composition) {
-                      _controller.addStatusListener((status) {
-                        if (status == AnimationStatus.dismissed)
-                          _controller.forward();
-                        else if (status == AnimationStatus.completed)
-                          _controller.reverse();
-                      });
-                      _controller
-                      ..duration = composition.duration
-                      ..forward();
-                    },
-                    delegates: LottieDelegates(
-                        values: [
-                          ValueDelegate.color(
-                              const ['**', 'Circle 1', '**'],
-                              value: Color(0xFF7755EC)
-                          ),
-                          ValueDelegate.color(
-                              const ['**', 'Circle 2', '**'],
-                              value: Color(0xFFA5ACB5)
-                          ),
-                          ValueDelegate.color(
-                              const ['**', 'Circle 3', '**'],
-                              value: Color(0xFF528CEF)
-                          ),
-                          ValueDelegate.color(
-                              const ['**', 'Circle 4', '**'],
-                              value: Color(0xFF4B2CEA)
-                          )
-                        ]
-                    )
-                ),
+                child: Lottie.asset('assets/lottie/loadingbar.json')
               )
             ],
           )

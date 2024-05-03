@@ -77,7 +77,7 @@ flutter:
     - assets/tatto/oldschool2.jpg
     - assets/tatto/watercolor1.jpg
     - assets/tatto/watercolor2.png
-    - assets/lottie/loading3.json
+    - assets/lottie/loadingbar.json
     - assets/kakao/kakao_login_large_narrow.png
     - assets/kakao/kakao_login_large_wide.png
     - assets/kakao/kakao_login_medium_narrow.png

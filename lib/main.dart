@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
           '/loading' : (context) => LoadingScreen(),
           '/login' : (context) => LoginScreen(),
         },
-        initialRoute: '/login',
+        initialRoute: '/login', // login으로 수정하기
         // home: MyAppPage(),
       ),
     );
