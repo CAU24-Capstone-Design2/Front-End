@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:scart/util/generateMaterialColor.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 
 import '../widget/widget_multiSelectChip.dart';
@@ -154,12 +153,32 @@ class CameraState extends State<CameraScreen> {
           ),
           SizedBox(height: 100, width: double.infinity),
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.all(10.0),
             child: IconButton(
               onPressed: () {
-                print(tattoController.text);
-                print(selectedTattostyleList.join(','));
-                Navigator.pushReplacementNamed(context, '/loading');
+                if (tattoController.text == null || selectedTattostyleList == null || _image == null) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Text("흉터 사진, 타투 스타일, 타투 내용은 \n필수 입력 항목입니다!"),
+                        actions: [
+                          TextButton(
+                            child: const Text('확인'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      );
+                    }
+                  );
+                } else {
+                  print(tattoController.text);
+                  print(selectedTattostyleList.join(','));
+                  Navigator.pushReplacementNamed(context, '/loading');
+                }
               },
               icon: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
