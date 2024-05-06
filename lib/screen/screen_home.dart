@@ -17,6 +17,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeState extends State<HomeScreen> {
+
+  List <Icon> icons = [
+    Icon(Icons.insert_photo, size: 160),
+    Icon(Icons.insert_photo, size: 160),
+    Icon(Icons.insert_photo, size: 160),
+    Icon(Icons.insert_photo, size: 160),
+    Icon(Icons.insert_photo, size: 160),
+    Icon(Icons.insert_photo, size: 160),];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +52,28 @@ class HomeState extends State<HomeScreen> {
             child: SingleChildScrollView( // Row vs. SingleChildScrollView : 스크롤 가능
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: [
-                Icon(Icons.insert_photo, size: 160),
-                Icon(Icons.insert_photo, size: 160),
-                Icon(Icons.insert_photo, size: 160),
-                Icon(Icons.insert_photo, size: 180),
-                Icon(Icons.insert_photo, size: 180),
-                Icon(Icons.insert_photo, size: 180),
-              ],
+              children: [for(var icon in icons) GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: Text("흉터 사진, 타투 스타일, 타투 내용은 \n필수 입력 항목입니다!"),
+                          actions: [
+                            TextButton(
+                              child: const Text('확인'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            )
+                          ],
+                        );
+                      }
+                  );
+                },
+                child: Icon(Icons.insert_photo, size: 160),
+              )],
             ),
           ),),
           SizedBox(height: 30, width: double.infinity),
@@ -84,7 +107,8 @@ class HomeState extends State<HomeScreen> {
                       color: Color(0xffEEF4FF),
                       borderRadius: BorderRadius.circular(10.0)
                   ),
-                ),          ),
+                ),
+          ),
         ],
       ),
     );
