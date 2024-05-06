@@ -61,9 +61,15 @@ class LoginState extends State<LoginScreen> {
       final String? name = controller.user?.kakaoAccount?.profile?.nickname;
       // controller.user?.kakaoAccount?.profile?.nickname;
       if (name != null) {
-        return Text(name);
+        return Text(name, style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+        ));
       } else {
-        return const Text("로그인이 필요합니다");
+        return const Text("로그인이 필요합니다", style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+        ));
       }
     }),
   );

@@ -98,9 +98,16 @@ class MyinfoState extends State<MyinfoScreen> {
       final String? name = controller.user?.kakaoAccount?.profile?.nickname;
       // controller.user?.kakaoAccount?.profile?.nickname;
       if (name != null) {
-        return Text(name + " 님");
+
+        return Text(name + " 님", style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 25,
+        ));
       } else {
-        return const Text("OOO 님");
+        return const Text("OOO 님", style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 25,
+        ));
       }
     }),
   );
