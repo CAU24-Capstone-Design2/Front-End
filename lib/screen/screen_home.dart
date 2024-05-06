@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:scart/screen/screen_tattostyle.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
 import 'package:lottie/lottie.dart';
+import 'package:scart/widget/widget_mytattoTilt.dart';
 
 import '../widget/widget_customAppBar.dart';
 import '../widget/widget_customhomeFAB.dart';
@@ -62,7 +63,7 @@ class HomeState extends State<HomeScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)
                           ),
-                          content: Text("흉터 사진, 타투 스타일, 타투 내용은 \n필수 입력 항목입니다!"),
+                          content: MytattoTilt(),
                           actions: [
                             TextButton(
                               child: const Text('확인'),
