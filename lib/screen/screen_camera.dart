@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
-
+import 'package:translator/translator.dart';
 import '../widget/widget_multiSelectChip.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -158,7 +158,7 @@ class CameraState extends State<CameraScreen> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: IconButton(
-              onPressed: () {
+              onPressed: () async {
                 if (tattoController.text == null || selectedTattostyleList == null || _image == null) {
                   showDialog(
                     context: context,
@@ -181,8 +181,14 @@ class CameraState extends State<CameraScreen> {
                     }
                   );
                 } else {
-                  print(tattoController.text);
-                  print(selectedTattostyleList.join(','));
+                  final translator = GoogleTranslator();
+                  translator
+                  .translate(tattoController.text, to: 'en')
+                  .then((result) => print("Source: ${tattoController.text}\nTranslated: $result"));
+
+                  translator
+                  .translate(selectedTattostyleList.join(','))
+                  .then((result) => print("Source: ${selectedTattostyleList.join(',')}\nTranslated: $result"));
                   Navigator.pushReplacementNamed(context, '/loading');
                 }
               },
