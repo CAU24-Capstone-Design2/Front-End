@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 class MytattoTilt extends StatefulWidget {
   const MytattoTilt({Key? key}) : super(key: key);
@@ -21,7 +22,13 @@ class _MytattoTiltState extends State<MytattoTilt> {
         child: Stack(
           children: [
             Image.asset('assets/airplane.jpg'),
-            Image.asset('assets/nobg_masked_airplane.png'),
+            SimpleShadow(
+              color: Colors.cyanAccent,
+              opacity: 1,
+              sigma: 5,
+              offset: const Offset(0, 0),
+              child: Image.asset('assets/nobg_masked_airplane.png'),
+            ),
           ],
         ),
       ),
