@@ -72,6 +72,8 @@ flutter:
     - assets/floating_button.png
     - assets/Tip.png
     - assets/startbar.png
+    - assets/airplane.jpg
+    - assets/nobg_masked_airplane.png
     - assets/tatto/linework1.png
     - assets/tatto/linework2.jpg
     - assets/tatto/oldschool1.jpg

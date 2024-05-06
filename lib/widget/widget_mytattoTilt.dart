@@ -22,12 +22,15 @@ class _MytattoTiltState extends State<MytattoTilt> {
         child: Stack(
           children: [
             Image.asset('assets/airplane.jpg'),
-            SimpleShadow(
-              color: Colors.cyanAccent,
-              opacity: 1,
-              sigma: 5,
-              offset: const Offset(0, 0),
-              child: Image.asset('assets/nobg_masked_airplane.png'),
+            Transform.translate(
+              offset: const Offset(200.0, 0.0),
+              child: SimpleShadow(
+                color: Colors.cyanAccent,
+                opacity: 1,
+                sigma: 5,
+                offset: const Offset(0, 0),
+                child: Image.asset('assets/nobg_masked_airplane.png'),
+              ),
             ),
           ],
         ),
