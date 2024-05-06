@@ -64,6 +64,9 @@ class CameraState extends State<CameraScreen> {
                         barrierDismissible: false,
                         builder: (BuildContext context) {
                           return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
                             title: const Text('사진 찍을 때 Tip !'),
                             content: SingleChildScrollView(
                               child: ListBody(
@@ -162,6 +165,9 @@ class CameraState extends State<CameraScreen> {
                     barrierDismissible: false,
                     builder: (BuildContext context) {
                       return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)
+                        ),
                         content: Text("흉터 사진, 타투 스타일, 타투 내용은 \n필수 입력 항목입니다!"),
                         actions: [
                           TextButton(
