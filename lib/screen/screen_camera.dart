@@ -1,9 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:translator/translator.dart';
+import 'package:http/http.dart' as http;
+import '../widget/widget_loading.dart';
 import '../widget/widget_multiSelectChip.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -14,7 +17,10 @@ class CameraScreen extends StatefulWidget {
 }
 
 class CameraState extends State<CameraScreen> {
+  var isLoading = false;
   XFile? _image;
+  var tattoStyle = "";
+  var tattoText = "";
   final ImagePicker picker = ImagePicker();
   final tattoController = TextEditingController();
 
@@ -36,6 +42,38 @@ class CameraState extends State<CameraScreen> {
     }
   }
 
+  Future<bool> requestTattto() async {
+    final url = Uri.http('165.194.104.144:8080', '/api/scar/requestTattoo');
+
+    try {
+      setState(() {
+        isLoading = true;
+      });
+
+      MultipartRequest request = new http.MultipartRequest('POST', url);
+      request.headers['Content-Type'] = 'application/json';
+      request.headers['accessToken'] = 'PbEg6sGLJM25s1aXp1QRmE7j0qLw9O5aHa0KPXVcAAABj1vNhQGvm_uHqQwxKA';
+      request.fields['styleKeyWord'] = tattoStyle;
+      request.fields['styleDescription'] = tattoText;
+
+      request.files.add(await http.MultipartFile.fromPath(
+          'scarImage', _image!.path));
+      print("****************multipart request send!!**************");
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        print("타투 데이터 전송 성공!");
+        return true;
+      } else {
+        print("타투 데이터 전송 실패!");
+        return false;
+      }
+    } catch(e) {
+      Exception(e);
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -44,7 +82,7 @@ class CameraState extends State<CameraScreen> {
         preferredSize: Size.fromHeight(83.0),
         child: CustomAppBar(),
       ),
-      body: ListView( // List// View : 스크롤 가능 vs. Column
+      body: isLoading ? LoadingBar() : ListView( // List// View : 스크롤 가능 vs. Column
         children: <Widget>[
           SizedBox(height: 10, width: double.infinity),
           Container(
@@ -182,14 +220,25 @@ class CameraState extends State<CameraScreen> {
                   );
                 } else {
                   final translator = GoogleTranslator();
+                  var tattoText = "";
+                  var tattoStyle = "";
                   translator
                   .translate(tattoController.text, to: 'en')
-                  .then((result) => print("Source: ${tattoController.text}\nTranslated: $result"));
+                  .then(
+                          (result) {
+                          print("Source: ${tattoController.text}\nTranslated: $result");
+                          tattoText = result.toString();
+                          }
+                  );
 
                   translator
                   .translate(selectedTattostyleList.join(','))
-                  .then((result) => print("Source: ${selectedTattostyleList.join(',')}\nTranslated: $result"));
-                  Navigator.pushReplacementNamed(context, '/loading');
+                  .then((result) {
+                      print("Source: ${selectedTattostyleList.join(',')}\nTranslated: $result");
+                      tattoStyle = result.toString();
+                      requestTattto();
+                  }
+                  );
                 }
               },
               icon: Row(

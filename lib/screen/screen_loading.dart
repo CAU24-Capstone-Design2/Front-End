@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:lottie/lottie.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -32,12 +31,7 @@ class LoadingState extends State<LoadingScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-        preferredSize: Size.fromHeight(83.0),
-        child: CustomAppBar(),
-        ),
-        body: ListView(
+    return ListView(
           children: [
             Container(
               margin: EdgeInsets.only(left: 20),
@@ -76,7 +70,6 @@ class LoadingState extends State<LoadingScreen> with TickerProviderStateMixin {
             ],
           )
           ],
-        )
-    );
+        );
   }
 }
