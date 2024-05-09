@@ -1,12 +1,18 @@
 import 'package:flutter/services.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class KakaoLoginApi {
   signWithKakao() async {
     final UserApi api = UserApi.instance;
+    final storage = FlutterSecureStorage();
     if (await isKakaoTalkInstalled()) {
       try{
           OAuthToken token = await api.loginWithKakaoTalk();
+          storage.write(
+            key: 'accessToken',
+            value: token.accessToken
+          );
           print("access token: " + token.accessToken);
           return api.me();
 
@@ -21,6 +27,10 @@ class KakaoLoginApi {
         // 카카오톡에 연결된 계정이 없는 경우 카카오계정으로 로그인
         try {
           OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+          storage.write(
+              key: 'accessToken',
+              value: token.accessToken
+          );
           print("access token: " + token.accessToken);
           return api.me();
         } catch (error) {
@@ -30,6 +40,10 @@ class KakaoLoginApi {
     } else {
       try {
         OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+        storage.write(
+            key: 'accessToken',
+            value: token.accessToken
+        );
         print("access token: " + token.accessToken);
         return api.me();
       } catch (error) {

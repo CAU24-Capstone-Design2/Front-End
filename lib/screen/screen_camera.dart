@@ -8,6 +8,7 @@ import 'package:translator/translator.dart';
 import 'package:http/http.dart' as http;
 import '../widget/widget_loading.dart';
 import '../widget/widget_multiSelectChip.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class CameraScreen extends StatefulWidget {
 }
 
 class CameraState extends State<CameraScreen> {
+  final storage = FlutterSecureStorage();
   var isLoading = false;
   XFile? _image;
   var tattoStyle = "";
@@ -43,16 +45,19 @@ class CameraState extends State<CameraScreen> {
   }
 
   Future<bool> requestTattto() async {
-    final url = Uri.http('165.194.104.144:8080', '/api/scar/requestTattoo');
+    final url = Uri.http('165.194.104.144:8888', '/api/scar/requestTattoo');
 
     try {
       setState(() {
         isLoading = true;
       });
+      var accessToken = await storage.read(key: 'accessToken');
+
+      print("***********accessToken************ " + accessToken!);
 
       MultipartRequest request = new http.MultipartRequest('POST', url);
       request.headers['Content-Type'] = 'application/json';
-      request.headers['accessToken'] = 'PbEg6sGLJM25s1aXp1QRmE7j0qLw9O5aHa0KPXVcAAABj1vNhQGvm_uHqQwxKA';
+      request.headers['accessToken'] = 'appToken'; //login시 발급되는 accessToken
       request.fields['styleKeyWord'] = tattoStyle;
       request.fields['styleDescription'] = tattoText;
 
