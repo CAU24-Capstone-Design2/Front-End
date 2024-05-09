@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:scart/screen/screen_camera.dart';
 import 'package:scart/screen/screen_home.dart';
-import 'package:scart/screen/screen_loading.dart';
 import 'package:scart/screen/screen_login.dart';
 import 'package:scart/screen/screen_myinfo.dart';
 import 'package:scart/screen/screen_tattostyle.dart';
@@ -48,7 +47,6 @@ class MyApp extends StatelessWidget {
           '/camera': (context) => CameraScreen(),
           '/myinfo': (context) => MyinfoScreen(),
           '/tattostyle': (context) => TattostyleScreen(),
-          '/loading' : (context) => LoadingScreen(),
           '/login' : (context) => LoginScreen(),
         },
         initialRoute: '/login', // login으로 수정하기
