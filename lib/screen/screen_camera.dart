@@ -51,13 +51,14 @@ class CameraState extends State<CameraScreen> {
       setState(() {
         isLoading = true;
       });
-      var accessToken = await storage.read(key: 'accessToken');
+      //var accessToken = await storage.read(key: 'accessToken');
+      var appToken = await storage.read(key: 'appToken');
 
-      print("***********accessToken************ " + accessToken!);
+      print("***********appToken************ " + appToken!);
 
       MultipartRequest request = new http.MultipartRequest('POST', url);
       request.headers['Content-Type'] = 'application/json';
-      request.headers['accessToken'] = 'appToken'; //login시 발급되는 accessToken
+      request.headers['accessToken'] = appToken ; //login시 발급되는 accessToken
       request.fields['styleKeyWord'] = tattoStyle;
       request.fields['styleDescription'] = tattoText;
 

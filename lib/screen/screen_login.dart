@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
 import '../util/kakaoController.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,6 +14,39 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => LoginState();
 }
 class LoginState extends State<LoginScreen> {
+  final storage = FlutterSecureStorage();
+
+  Future<bool> requestLogin() async {
+    final url = Uri.http('165.194.104.144:8888', '/api/auth/login');
+
+    try {
+      var accessToken = await storage.read(key: 'accessToken');
+
+      http.Response response = await http.post(url, headers: {'accessToken':accessToken!, 'Content-Type':'application/json'});
+
+      if (response.statusCode == 200) {
+        print("백엔드 로그인 성공!");
+        //print(response.body);
+        Map<String, dynamic> bodyMap = jsonDecode(response.body);
+        Map<String, dynamic> dataMap = await bodyMap['data'];
+        //print(dataMap['accessToken']);
+
+        storage.write(
+            key: 'appToken',
+            value: dataMap['accessToken']
+        );
+
+        return true;
+      } else {
+        print("백엔드 로그인 실패!");
+        return false;
+      }
+    } catch(e) {
+      Exception(e);
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +117,10 @@ class LoginState extends State<LoginScreen> {
       if (controller.user != null) {
           return GestureDetector(
             onTap: () {
-              Navigator.pushReplacementNamed(context, '/home');
+              requestLogin().then((value) {
+                if (value) {
+                Navigator.pushReplacementNamed(context, '/home');
+              }});
             },
             child: Image.asset("assets/startbar.png"),
           );
