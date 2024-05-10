@@ -1,14 +1,14 @@
-class AllTattoList {
+class AllTattooList {
   final int scarId;
   final String tattooImage; //uri
 
-  const AllTattoList({
+  const AllTattooList({
     required this.scarId,
     required this.tattooImage,
   });
 
-  factory AllTattoList.fromJson(Map<String, dynamic> json) {
-    return AllTattoList(
+  factory AllTattooList.fromJson(Map<String, dynamic> json) {
+    return AllTattooList(
         scarId: json['scarId'],
         tattooImage: json['tattooImage'],
     );

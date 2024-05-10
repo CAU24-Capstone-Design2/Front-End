@@ -1,11 +1,13 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:scart/screen/screen_tattostyle.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
-import 'package:lottie/lottie.dart';
 import 'package:scart/widget/widget_mytattoTilt.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../util/AllTattooList.dart';
 import '../widget/widget_customAppBar.dart';
 import '../widget/widget_customhomeFAB.dart';
 
@@ -18,7 +20,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeState extends State<HomeScreen> {
-
+  final storage = FlutterSecureStorage();
+  late Future<AllTattooList> futureAllTattoo;
   List <Icon> icons = [
     Icon(Icons.insert_photo, size: 160),
     Icon(Icons.insert_photo, size: 160),
@@ -27,6 +30,34 @@ class HomeState extends State<HomeScreen> {
     Icon(Icons.insert_photo, size: 160),
     Icon(Icons.insert_photo, size: 160),];
 
+  Future<AllTattooList> getAllTattoo() async {
+    final url = Uri.http('165.194.104.144:8888', '/api/scar/getAllTattoo');
+
+    try {
+      var appToken = await storage.read(key: 'appToken');
+
+      final response = await http.get(url, headers: {'accessToken':appToken!, 'Content-Type':'application/json'})
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> bodyMap = jsonDecode(response.body);
+        Map<String, dynamic> dataMap = await bodyMap['data'];
+
+        return AllTattooList.fromJson(dataMap);
+      } else {
+        print("Failed to load AllTattoo");
+        throw Exception("Failed to load AllTattoo");
+      }
+    } catch(e) {
+      rethrow;
+    }
+
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    futureAllTattoo = getAllTattoo();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
