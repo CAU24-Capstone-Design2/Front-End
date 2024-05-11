@@ -21,18 +21,18 @@ class CameraState extends State<CameraScreen> {
   final storage = FlutterSecureStorage();
   var isLoading = false;
   XFile? _image;
-  var tattoStyle = "";
-  var tattoText = "";
+  var tattooStyle = "";
+  var tattooText = "";
   final ImagePicker picker = ImagePicker();
-  final tattoController = TextEditingController();
+  final tattooController = TextEditingController();
 
-  List<String> tattostyleList = [
+  List<String> tattoostyleList = [
     "올드스쿨",
     "라인워크",
     "수채화",
   ];
 
-  List<String> selectedTattostyleList = [];
+  List<String> selectedTattoostyleList = [];
 
   // 이미지 가져오는 함수
   Future getImage(ImageSource imageSource) async {
@@ -55,14 +55,14 @@ class CameraState extends State<CameraScreen> {
       var appToken = await storage.read(key: 'appToken');
 
       print("***********appToken************ " + appToken!);
-      print("tattooStyle: " + tattoStyle);
-      print("tattoText: " + tattoText);
+      print("tattooStyle: " + tattooStyle);
+      print("tattooText: " + tattooText);
 
       MultipartRequest request = new http.MultipartRequest('POST', url);
       request.headers['Content-Type'] = 'application/json';
       request.headers['accessToken'] = appToken ; //login시 발급되는 accessToken
-      request.fields['styleKeyWord'] = tattoStyle;
-      request.fields['styleDescription'] = tattoText;
+      request.fields['styleKeyWord'] = tattooStyle;
+      request.fields['styleDescription'] = tattooText;
 
       request.files.add(await http.MultipartFile.fromPath(
           'scarImage', _image!.path));
@@ -160,10 +160,10 @@ class CameraState extends State<CameraScreen> {
                       fontWeight: FontWeight.w600
                   ),),
                 MultiSelectChip(
-                  tattostyleList,
+                  tattoostyleList,
                   onSelectedChanged: (selectedList) {
                     setState(() {
-                      selectedTattostyleList = selectedList;
+                      selectedTattoostyleList = selectedList;
                     });
                   },
                   maxSelection: 3,
@@ -194,7 +194,7 @@ class CameraState extends State<CameraScreen> {
                             borderSide: BorderSide.none
                         )
                     ),
-                    controller: tattoController,
+                    controller: tattooController,
                   ),
                 )
               ],
@@ -205,7 +205,7 @@ class CameraState extends State<CameraScreen> {
             padding: const EdgeInsets.all(10.0),
             child: IconButton(
               onPressed: () async {
-                if (tattoController.text == null || selectedTattostyleList == null || _image == null) {
+                if (tattooController.text == null || selectedTattoostyleList == null || _image == null) {
                   showDialog(
                     context: context,
                     barrierDismissible: false,
@@ -230,20 +230,20 @@ class CameraState extends State<CameraScreen> {
                   final translator = GoogleTranslator();
 
                   translator
-                  .translate(selectedTattostyleList.join(','))
+                  .translate(selectedTattoostyleList.join(','))
                   .then((result) {
-                      print("Source: ${selectedTattostyleList.join(',')}\nTranslated: $result");
+                      print("Source: ${selectedTattoostyleList.join(',')}\nTranslated: $result");
                       setState(() {
-                        tattoStyle = result.toString();
+                        tattooStyle = result.toString();
                       });
 
                       translator
-                          .translate(tattoController.text, to: 'en')
+                          .translate(tattooController.text, to: 'en')
                           .then(
                               (result) {
-                            print("Source: ${tattoController.text}\nTranslated: $result");
+                            print("Source: ${tattooController.text}\nTranslated: $result");
                             setState(() {
-                              tattoText = result.toString();
+                              tattooText = result.toString();
                               requestTattto();
                             });
                           }

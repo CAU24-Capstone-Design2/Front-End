@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
-import 'package:scart/widget/widget_mytattoTilt.dart';
+import 'package:scart/widget/widget_mytattooTilt.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -168,7 +168,7 @@ class HomeState extends State<HomeScreen> {
             child: GestureDetector(
               onTap: () {
                 print('스타일 보기');
-                Navigator.pushNamed(context, '/tattostyle');
+                Navigator.pushNamed(context, '/tattoostyle');
               },
               child: Text('스타일 둘러보기 >',
                 textAlign: TextAlign.left,
@@ -217,7 +217,7 @@ class HomeState extends State<HomeScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)
                   ),
-                  content: MytattoTilt(),
+                  content: MytattooTilt(),
                   actions: [
                     TextButton(
                       child: const Text('확인'),

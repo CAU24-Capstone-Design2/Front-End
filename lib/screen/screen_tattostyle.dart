@@ -3,18 +3,18 @@ import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
 
 import '../widget/widget_customhomeFAB.dart';
-import '../widget/widget_tattostyleone.dart';
-import '../widget/widget_tattostylethree.dart';
-import '../widget/widget_tattostyletwo.dart';
+import '../widget/widget_tattoostyleone.dart';
+import '../widget/widget_tattoostylethree.dart';
+import '../widget/widget_tattoostyletwo.dart';
 
-class TattostyleScreen extends StatefulWidget {
-  const TattostyleScreen({Key? key}) : super(key: key);
+class TattoostyleScreen extends StatefulWidget {
+  const TattoostyleScreen({Key? key}) : super(key: key);
 
   @override
-  State<TattostyleScreen> createState() => TattostyleState();
+  State<TattoostyleScreen> createState() => TattoostyleState();
 }
 
-class TattostyleState extends State<TattostyleScreen> {
+class TattoostyleState extends State<TattoostyleScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -54,9 +54,9 @@ class TattostyleState extends State<TattostyleScreen> {
             Expanded(
               child: TabBarView(
                 children: [
-                  TattostyleOne(),
-                  TattostyleTwo(),
-                  TattostyleThree(),
+                  TattoostyleOne(),
+                  TattoostyleTwo(),
+                  TattoostyleThree(),
                 ],
               ),
             )
