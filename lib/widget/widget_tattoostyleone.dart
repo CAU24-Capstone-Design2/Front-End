@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class TattostyleOne extends StatelessWidget {
-  const TattostyleOne({Key? key}) : super(key: key);
+class TattoostyleOne extends StatelessWidget {
+  const TattoostyleOne({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class TattostyleOne extends StatelessWidget {
             margin: const EdgeInsets.all(10.0),
             child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
-            child: Image.asset('assets/tatto/oldschool1.jpg'),
+            child: Image.asset('assets/tattoo/oldschool1.jpg'),
           ),
           ),
         ),

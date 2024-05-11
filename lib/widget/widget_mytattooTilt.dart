@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
-class MytattoTilt extends StatefulWidget {
-  const MytattoTilt({Key? key}) : super(key: key);
+class MytattooTilt extends StatefulWidget {
+  const MytattooTilt({Key? key}) : super(key: key);
 
   @override
-  _MytattoTiltState createState() => _MytattoTiltState();
+  _MytattooTiltState createState() => _MytattooTiltState();
 }
 
-class _MytattoTiltState extends State<MytattoTilt> with TickerProviderStateMixin {
+class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMixin {
   late AnimationController _controller1, _controller2;
   late Animation<double> _animation1, _animation2;
 
