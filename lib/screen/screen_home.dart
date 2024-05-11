@@ -148,15 +148,29 @@ class HomeState extends State<HomeScreen> {
             child: SingleChildScrollView( // Row vs. SingleChildScrollView : 스크롤 가능
             scrollDirection: Axis.horizontal,
             child: isFirst ?
-                Container(
-                  child: Text("새로운 타투를 생성해보세요!"),
-                ) : FutureBuilder<List<AllTattooList>>(
+            SizedBox(
+              height: 140,
+              child: Center(
+                child: Text("사진 촬영을 통해 나만의 타투를 만들어보세요! 🤹🏻", style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                )),
+              ),
+            ) : FutureBuilder<List<AllTattooList>>(
               future: futureAllTattoo,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return buildTattoos(snapshot);
                 } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}에러!");
+                  return SizedBox(
+                    height: 140,
+                    child: Center(
+                      child: Text("[ERROR] ${snapshot.error} !", style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      )),
+                    ),
+                  );
                 }
                 return CircularProgressIndicator();
               },

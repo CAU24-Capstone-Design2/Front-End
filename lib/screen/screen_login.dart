@@ -117,10 +117,11 @@ class LoginState extends State<LoginScreen> {
       if (controller.user != null) {
           return GestureDetector(
             onTap: () {
-              requestLogin().then((value) {
-                if (value) {
-                Navigator.pushReplacementNamed(context, '/home');
-              }});
+              //requestLogin().then((value) {
+              //  if (value) {
+              //  Navigator.pushReplacementNamed(context, '/home');
+              //}});
+              Navigator.pushReplacementNamed(context, '/home'); // 백엔드랑 연동시엔 지우기!
             },
             child: Image.asset("assets/startbar.png"),
           );

@@ -78,12 +78,12 @@ flutter:
     - assets/startbar.png
     - assets/airplane.jpg
     - assets/nobg_masked_airplane.png
-    - assets/tatto/linework1.png
-    - assets/tatto/linework2.jpg
-    - assets/tatto/oldschool1.jpg
-    - assets/tatto/oldschool2.jpg
-    - assets/tatto/watercolor1.jpg
-    - assets/tatto/watercolor2.png
+    - assets/tattoo/linework1.png
+    - assets/tattoo/linework2.jpg
+    - assets/tattoo/oldschool1.jpg
+    - assets/tattoo/oldschool2.jpg
+    - assets/tattoo/watercolor1.jpg
+    - assets/tattoo/watercolor2.png
     - assets/lottie/loadingbar.json
     - assets/kakao/kakao_login_large_narrow.png
     - assets/kakao/kakao_login_large_wide.png
