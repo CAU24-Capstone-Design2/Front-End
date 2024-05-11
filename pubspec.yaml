@@ -121,18 +121,18 @@ flutter:
 flutter_native_splash:
   color: "#D8E5FF"
   # background_image: "assets/background.png"
-  image: lib/asset/ScArt.png
+  image: assets/ScArt.png
   android_gravity: fill
   fullscreen: true
   android12: true
 
   android_12:
-     image: lib/asset/ScArt.png
+     image: assets/ScArt.png
      icon_background_color: "#D8E5FF"
      color: "#D8E5FF"
 
 flutter_icons:
-  image_path: "lib/asset/icon.png"
+  image_path: "assets/icon.png"
   android: true
   background_color: "D8E5FF"
 
