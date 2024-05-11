@@ -231,7 +231,7 @@ class HomeState extends State<HomeScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)
                   ),
-                  content: MytattooTilt(),
+                  content: MytattooTilt(), // 여기다가 scarId 넘겨줘서 요청보내기!!
                   actions: [
                     TextButton(
                       child: const Text('확인'),

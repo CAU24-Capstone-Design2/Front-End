@@ -227,15 +227,15 @@ class MyinfoState extends State<MyinfoScreen> {
       physics: ScrollPhysics(),
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: 20,
+      itemCount: snapshot.length,
       itemBuilder: (context, index) =>
           Container(
-            width: 80,
-            height: 80,
-            margin: const EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-                color: Color(0xffEEF4FF),
-                borderRadius: BorderRadius.circular(10.0)
+            width: 100,
+            height: 100,
+            margin: const EdgeInsets.all(10.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.network(snapshot[index].tattooImage.toString()),
             ),
           ),
     );
