@@ -8,6 +8,7 @@ import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:scart/widget/widget_mytattooTilt.dart';
 
 import '../util/AllTattooList.dart';
 import '../util/Tattoo.dart';
@@ -229,15 +230,44 @@ class MyinfoState extends State<MyinfoScreen> {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemCount: snapshot.length,
       itemBuilder: (context, index) =>
-          Container(
-            width: 100,
-            height: 100,
-            margin: const EdgeInsets.all(10.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(snapshot[index].tattooImage.toString()),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    setState(() {
+                      scarId = snapshot[index].scarId;
+                      futureTattoo = getTattooAllInfo();
+                      print(futureTattoo);
+                    });
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)
+                      ),
+                      content: MytattooTilt(), // 여기다가 scarId 넘겨줘서 요청보내기!!
+                      actions: [
+                        TextButton(
+                          child: const Text('확인'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    );
+                  }
+              );
+            },
+            child: Container(
+              width: 100,
+              height: 100,
+              margin: const EdgeInsets.all(10.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.network(snapshot[index].tattooImage.toString()),
+              ),
             ),
-          ),
+          )
     );
   }
 }
