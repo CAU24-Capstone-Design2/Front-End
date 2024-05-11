@@ -5,7 +5,7 @@ import 'package:scart/screen/screen_camera.dart';
 import 'package:scart/screen/screen_home.dart';
 import 'package:scart/screen/screen_login.dart';
 import 'package:scart/screen/screen_myinfo.dart';
-import 'package:scart/screen/screen_tattostyle.dart';
+import 'package:scart/screen/screen_tattoostyle.dart';
 import 'package:scart/util/generateMaterialColor.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           '/home': (context) => HomeScreen(),
           '/camera': (context) => CameraScreen(),
           '/myinfo': (context) => MyinfoScreen(),
-          '/tattostyle': (context) => TattostyleScreen(),
+          '/tattoostyle': (context) => TattoostyleScreen(),
           '/login' : (context) => LoginScreen(),
         },
         initialRoute: '/login', // login으로 수정하기
