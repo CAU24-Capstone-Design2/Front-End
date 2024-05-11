@@ -13,6 +13,7 @@ import 'package:scart/widget/widget_mytattooTilt.dart';
 import '../util/AllTattooList.dart';
 import '../util/Tattoo.dart';
 import '../widget/widget_customhomeFAB.dart';
+import '../widget/widget_showTattoos.dart';
 
 class MyinfoScreen extends StatefulWidget {
   const MyinfoScreen({Key? key}) : super(key: key);
@@ -157,7 +158,7 @@ class MyinfoState extends State<MyinfoScreen> {
           ) : FutureBuilder<List<AllTattooList>>(
             future: futureAllTattoo,
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (!snapshot.hasData) {
                 return buildGrid(snapshot);
               } else if (snapshot.hasError) {
                 return SizedBox(
@@ -228,24 +229,24 @@ class MyinfoState extends State<MyinfoScreen> {
       physics: ScrollPhysics(),
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: snapshot.length,
+      itemCount: 20, //snapshot.length
       itemBuilder: (context, index) =>
           GestureDetector(
             onTap: () {
+              setState(() {
+                //scarId = snapshot[index].scarId;
+                futureTattoo = getTattooAllInfo();
+                print(futureTattoo);
+              });
               showDialog(
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) {
-                    setState(() {
-                      scarId = snapshot[index].scarId;
-                      futureTattoo = getTattooAllInfo();
-                      print(futureTattoo);
-                    });
                     return AlertDialog(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0)
                       ),
-                      content: MytattooTilt(), // 여기다가 scarId 넘겨줘서 요청보내기!!
+                      content: ShowTattoos(), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
                       actions: [
                         TextButton(
                           child: const Text('확인'),
@@ -264,7 +265,7 @@ class MyinfoState extends State<MyinfoScreen> {
               margin: const EdgeInsets.all(10.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.network(snapshot[index].tattooImage.toString()),
+                child: Image.asset('assets/tattoo/oldschool1.jpg')//Image.network(snapshot[index].tattooImage.toString()),
               ),
             ),
           )

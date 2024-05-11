@@ -218,20 +218,20 @@ class HomeState extends State<HomeScreen> {
     return Row(
       children: [for(var snap in snapshot) GestureDetector(
         onTap: () {
+          setState(() {
+            scarId = snap.scarId;
+            futureTattoo = getTattooAllInfo();
+            print(futureTattoo);
+          });
           showDialog(
               context: context,
               barrierDismissible: false,
               builder: (BuildContext context) {
-                setState(() {
-                  scarId = snap.scarId;
-                  futureTattoo = getTattooAllInfo();
-                  print(futureTattoo);
-                });
                 return AlertDialog(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)
                   ),
-                  content: MytattooTilt(), // 여기다가 scarId 넘겨줘서 요청보내기!!
+                  content: MytattooTilt(), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
                   actions: [
                     TextButton(
                       child: const Text('확인'),

@@ -78,6 +78,8 @@ flutter:
     - assets/startbar.png
     - assets/airplane.jpg
     - assets/nobg_masked_airplane.png
+    - assets/scar1.png
+    - assets/nobg_masked_scar.png
     - assets/tattoo/linework1.png
     - assets/tattoo/linework2.jpg
     - assets/tattoo/oldschool1.jpg
