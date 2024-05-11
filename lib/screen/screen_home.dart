@@ -21,7 +21,8 @@ class HomeScreen extends StatefulWidget {
 
 class HomeState extends State<HomeScreen> {
   final storage = FlutterSecureStorage();
-  late Future<AllTattooList> futureAllTattoo;
+  Future<List<AllTattooList>>? futureAllTattoo;
+
   List <Icon> icons = [
     Icon(Icons.insert_photo, size: 160),
     Icon(Icons.insert_photo, size: 160),
@@ -30,19 +31,24 @@ class HomeState extends State<HomeScreen> {
     Icon(Icons.insert_photo, size: 160),
     Icon(Icons.insert_photo, size: 160),];
 
-  Future<AllTattooList> getAllTattoo() async {
+  Future<List<AllTattooList>> getAllTattoo() async {
     final url = Uri.http('165.194.104.144:8888', '/api/scar/getAllTattoo');
 
     try {
       var appToken = await storage.read(key: 'appToken');
 
-      final response = await http.get(url, headers: {'accessToken':appToken!, 'Content-Type':'application/json'})
+      final response = await http.get(url, headers: {'accessToken':appToken!, 'Content-Type':'application/json'});
 
       if (response.statusCode == 200) {
         Map<String, dynamic> bodyMap = jsonDecode(response.body);
-        Map<String, dynamic> dataMap = await bodyMap['data'];
+        List<dynamic> dataMap = await bodyMap['data'];
+        List<AllTattooList> allTattooInfo =
+            dataMap.map((dynamic item) => AllTattooList.fromJson(item)).toList();
 
-        return AllTattooList.fromJson(dataMap);
+        print("********test getAllTattoo request********");
+        print(allTattooInfo);
+
+        return allTattooInfo;
       } else {
         print("Failed to load AllTattoo");
         throw Exception("Failed to load AllTattoo");
@@ -58,6 +64,7 @@ class HomeState extends State<HomeScreen> {
     super.initState();
     futureAllTattoo = getAllTattoo();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,33 +90,17 @@ class HomeState extends State<HomeScreen> {
           Center(
             child: SingleChildScrollView( // Row vs. SingleChildScrollView : 스크롤 가능
             scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [for(var icon in icons) GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)
-                          ),
-                          content: MytattoTilt(),
-                          actions: [
-                            TextButton(
-                              child: const Text('확인'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                        );
-                      }
-                  );
-                },
-                child: Icon(Icons.insert_photo, size: 160),
-              )],
-            ),
+            child: FutureBuilder<List<AllTattooList>>(
+              future: futureAllTattoo,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return buildTattoos(snapshot);
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}에러!");
+                }
+                return CircularProgressIndicator();
+              },
+            )
           ),),
           SizedBox(height: 30, width: double.infinity),
           Container(
@@ -146,6 +137,36 @@ class HomeState extends State<HomeScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildTattoos(snapshot) {
+    return Row(
+      children: [for(var snap in snapshot) GestureDetector(
+        onTap: () {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  content: MytattoTilt(),
+                  actions: [
+                    TextButton(
+                      child: const Text('확인'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                );
+              }
+          );
+        },
+        child: Image.network(snap.tattooImage.toString()),
+      )],
     );
   }
 }
