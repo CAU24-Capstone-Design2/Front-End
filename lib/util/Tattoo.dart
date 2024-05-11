@@ -16,5 +16,4 @@ class Tattoo {
       tattooImage: json['tattooImage'],
     );
   }
-
 }
