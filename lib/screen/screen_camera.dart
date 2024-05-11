@@ -55,6 +55,8 @@ class CameraState extends State<CameraScreen> {
       var appToken = await storage.read(key: 'appToken');
 
       print("***********appToken************ " + appToken!);
+      print("tattooStyle: " + tattoStyle);
+      print("tattoText: " + tattoText);
 
       MultipartRequest request = new http.MultipartRequest('POST', url);
       request.headers['Content-Type'] = 'application/json';
@@ -226,23 +228,26 @@ class CameraState extends State<CameraScreen> {
                   );
                 } else {
                   final translator = GoogleTranslator();
-                  var tattoText = "";
-                  var tattoStyle = "";
-                  translator
-                  .translate(tattoController.text, to: 'en')
-                  .then(
-                          (result) {
-                          print("Source: ${tattoController.text}\nTranslated: $result");
-                          tattoText = result.toString();
-                          }
-                  );
 
                   translator
                   .translate(selectedTattostyleList.join(','))
                   .then((result) {
                       print("Source: ${selectedTattostyleList.join(',')}\nTranslated: $result");
-                      tattoStyle = result.toString();
-                      requestTattto();
+                      setState(() {
+                        tattoStyle = result.toString();
+                      });
+
+                      translator
+                          .translate(tattoController.text, to: 'en')
+                          .then(
+                              (result) {
+                            print("Source: ${tattoController.text}\nTranslated: $result");
+                            setState(() {
+                              tattoText = result.toString();
+                              requestTattto();
+                            });
+                          }
+                      );
                   }
                   );
                 }

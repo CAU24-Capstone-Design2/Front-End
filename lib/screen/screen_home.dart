@@ -23,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 class HomeState extends State<HomeScreen> {
   final storage = FlutterSecureStorage();
   var scarId = 0;
+  var isFirst = true;
   Future<List<AllTattooList>>? futureAllTattoo;
   late Future<Tattoo> futureTattoo;
 
@@ -33,6 +34,26 @@ class HomeState extends State<HomeScreen> {
     Icon(Icons.insert_photo, size: 160),
     Icon(Icons.insert_photo, size: 160),
     Icon(Icons.insert_photo, size: 160),];
+
+  Future<bool> checkIsFirstUser() async {
+    final url = Uri.http('165.194.104.144:8888', '/api/user/checkIsFirstUser');
+
+    try {
+      var appToken = await storage.read(key: 'appToken');
+
+      final response = await http.get(url, headers: {'accessToken':appToken!, 'Content-Type':'application/json'});
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+
+    } catch(e) {
+      Exception(e);
+      return false;
+    }
+  }
 
   Future<List<AllTattooList>> getAllTattoo() async {
     final url = Uri.http('165.194.104.144:8888', '/api/scar/getAllTattoo');
@@ -91,7 +112,14 @@ class HomeState extends State<HomeScreen> {
   @override
   void initState(){
     super.initState();
-    futureAllTattoo = getAllTattoo();
+    if (checkIsFirstUser() == true) {
+      setState(() {
+        isFirst = true;
+      });
+    } else {
+      futureAllTattoo = getAllTattoo();
+      isFirst = false;
+    }
   }
 
   @override
@@ -119,7 +147,10 @@ class HomeState extends State<HomeScreen> {
           Center(
             child: SingleChildScrollView( // Row vs. SingleChildScrollView : 스크롤 가능
             scrollDirection: Axis.horizontal,
-            child: FutureBuilder<List<AllTattooList>>(
+            child: isFirst ?
+                Container(
+                  child: Text("새로운 타투를 생성해보세요!"),
+                ) : FutureBuilder<List<AllTattooList>>(
               future: futureAllTattoo,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
