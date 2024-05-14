@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:scart/util/Tattoo.dart';
 
 class ShowTattoos extends StatefulWidget {
-  const ShowTattoos({Key? key, this.tattooData}) : super(key: key);
-  final tattooData;
+  const ShowTattoos({Key? key, required this.tattooData}) : super(key: key);
+  final Future<Tattoo> tattooData;
 
   @override
   _ShowTattoosState createState() => _ShowTattoosState();
@@ -35,61 +36,67 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 250,
-      child: PageView(
-        controller: pageController,
-        children: [
-          Container(
-            child: Column(
-              children: [
-                Image.network(widget.tattooData.scarImage, height: 180,),
-                SizedBox(
-                  height: 20,
+    return FutureBuilder<Tattoo>(
+      future: widget.tattooData,
+      builder: (context, snapshot) {
+        Tattoo tattoo = snapshot.data!;
+        return Container(
+          height: 250,
+          child: PageView(
+            controller: pageController,
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Image.network(tattoo.scarImage, height: 180,),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        downloadImage(tattoo.scarImage);
+                      },
+                      child: Text('Download'),
+                    )
+                  ],
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    downloadImage(widget.tattooData.scarImage);
-                  },
-                  child: Text('Download'),
-                )
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    Image.asset(tattoo.segmentImage, height: 180,),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        downloadImage(tattoo.segmentImage);
+                      },
+                      child: Text('Download'),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    Image.asset(tattoo.tattooImage, height: 180,),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        downloadImage(tattoo.tattooImage);
+                      },
+                      child: Text('Download'),
+                    )
+                  ],
+                ),
+              ),
             ],
-           ),
           ),
-          Container(
-            child: Column(
-              children: [
-                Image.asset(widget.tattooData.segmentImage, height: 180,),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    downloadImage(widget.tattooData.segmentImage);
-                  },
-                  child: Text('Download'),
-                )
-              ],
-            ),
-          ),
-          Container(
-            child: Column(
-              children: [
-                Image.asset(widget.tattooData.tattooImage, height: 180,),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    downloadImage(widget.tattooData.tattooImage);
-                  },
-                  child: Text('Download'),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

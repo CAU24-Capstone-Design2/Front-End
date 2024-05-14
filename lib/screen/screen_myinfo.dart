@@ -3,15 +3,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scart/util/AllTattooList.dart';
+import 'package:scart/util/Tattoo.dart';
 import 'package:scart/util/kakaoController.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:scart/widget/widget_customNavBar.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:scart/widget/widget_mytattooTilt.dart';
 
-import '../util/AllTattooList.dart';
-import '../util/Tattoo.dart';
 import '../widget/widget_customhomeFAB.dart';
 import '../widget/widget_showTattoos.dart';
 
@@ -246,7 +245,7 @@ class MyinfoState extends State<MyinfoScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0)
                       ),
-                      content: ShowTattoos(), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
+                      content: ShowTattoos(tattooData: futureTattoo), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
                       actions: [
                         TextButton(
                           child: const Text('확인'),
@@ -265,7 +264,7 @@ class MyinfoState extends State<MyinfoScreen> {
               margin: const EdgeInsets.all(10.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset('assets/tattoo/oldschool1.jpg')//Image.network(snapshot[index].tattooImage.toString()),
+                child: Image.network(snapshot[index].tattooImage.toString()),
               ),
             ),
           )

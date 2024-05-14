@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:scart/util/Tattoo.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 class MytattooTilt extends StatefulWidget {
-  const MytattooTilt({Key? key}) : super(key: key);
+  const MytattooTilt({Key? key, required this.tattooData}) : super(key: key);
+
+  final Future<Tattoo> tattooData;
 
   @override
   _MytattooTiltState createState() => _MytattooTiltState();
@@ -50,23 +53,27 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: AnimatedBuilder(
-        animation: _animation1,
-        builder: (context, child) {
-          return Stack(
-            children: [
-              Transform(
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.001)
-                  ..rotateY(_animation1.value),
-                child: Image.asset('assets/airplane.jpg'),
-              ),
-              Transform(
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.001)
-                  ..rotateY(_animation1.value),
-                child: AnimatedBuilder(
+    return FutureBuilder<Tattoo>(
+      future: widget.tattooData,
+      builder: (context, snapshot) {
+        Tattoo tattoo = snapshot.data!;
+        return Container(
+          child: AnimatedBuilder(
+            animation: _animation1,
+            builder: (context, child) {
+              return Stack(
+                children: [
+                  Transform(
+                    transform: Matrix4.identity()
+                      ..setEntry(3, 2, 0.001)
+                      ..rotateY(_animation1.value),
+                    child: Image.network(tattoo.scarImage),
+                  ),
+                  Transform(
+                    transform: Matrix4.identity()
+                      ..setEntry(3, 2, 0.001)
+                      ..rotateY(_animation1.value),
+                    child: AnimatedBuilder(
                       animation: _animation2,
                       builder: (context, child) {
                         return Transform.translate(
@@ -76,16 +83,18 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                             opacity: 1,
                             sigma: 5,
                             offset: const Offset(0, 0),
-                            child: Image.asset('assets/nobg_masked_airplane.png'),
+                            child: Image.network(tattoo.segmentImage),
                           ),
                         );
-          },
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
-              ),
-            ],
-          );
-        },
-      ),
+        );
+      },
     );
   }
 }
