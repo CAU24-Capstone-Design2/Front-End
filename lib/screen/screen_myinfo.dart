@@ -57,7 +57,7 @@ class MyinfoState extends State<MyinfoScreen> {
     }
   }
 
-  Future<List<AllTattooList>> getAllTattoo() async {
+  Future<bool> getAllTattoo() async {
     final url = Uri.http('165.194.104.144:8888', '/api/scar/getAllTattoo');
 
     try {
@@ -66,15 +66,25 @@ class MyinfoState extends State<MyinfoScreen> {
       final response = await http.get(url, headers: {'accessToken':appToken!, 'Content-Type':'application/json'});
 
       if (response.statusCode == 200) {
+        print("test****************1");
         Map<String, dynamic> bodyMap = jsonDecode(response.body);
+        print(bodyMap);
+        print("test****************2");
         List<dynamic> dataMap = await bodyMap['data'];
         List<AllTattooList> allTattooInfo =
         dataMap.map((dynamic item) => AllTattooList.fromJson(item)).toList();
+        print("test****************");
+        print("allTattooInfo length: "+tattolength.toString());
+        print(allTattooInfo[0].tattooImage);
 
-        print("********test getAllTattoo request********");
-        print(allTattooInfo);
+        setState(() {
+          tattolength = allTattooInfo.length;
+          futureAllTattoo = allTattooInfo;
+        });
 
-        return allTattooInfo;
+        print("tattoolength in allTattooInfo *************"+tattolength.toString());
+
+        return true;
       } else {
         print("Failed to load AllTattoo");
         throw Exception("Failed to load AllTattoo");
