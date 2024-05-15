@@ -71,6 +71,7 @@ class CameraState extends State<CameraScreen> {
 
       if (response.statusCode == 200) {
         print("타투 데이터 전송 성공!");
+        Navigator.pushReplacementNamed(context, '/home');
         return true;
       } else {
         print("타투 데이터 전송 실패!");

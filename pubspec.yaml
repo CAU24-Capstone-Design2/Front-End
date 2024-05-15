@@ -75,25 +75,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/appbar_logo.png
-    - assets/floating_button.png
-    - assets/Tip.png
-    - assets/startbar.png
-    - assets/airplane.jpg
-    - assets/nobg_masked_airplane.png
-    - assets/scar1.png
-    - assets/nobg_masked_scar.png
-    - assets/tattoo/linework1.png
-    - assets/tattoo/linework2.jpg
-    - assets/tattoo/oldschool1.jpg
-    - assets/tattoo/oldschool2.jpg
-    - assets/tattoo/watercolor1.jpg
-    - assets/tattoo/watercolor2.png
-    - assets/lottie/loadingbar.json
-    - assets/kakao/kakao_login_large_narrow.png
-    - assets/kakao/kakao_login_large_wide.png
-    - assets/kakao/kakao_login_medium_narrow.png
-    - assets/kakao/kakao_login_medium_wide.png
+    - assets/
     - .env
   #   - images/a_dot_ham.jpeg
 

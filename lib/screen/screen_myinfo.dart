@@ -145,7 +145,7 @@ class MyinfoState extends State<MyinfoScreen> {
               ),
             ),
           ),
-          isFirst ?
+          !isFirst ?
           SizedBox(
             height: 140,
             child: Center(

@@ -5,7 +5,7 @@ import 'package:simple_shadow/simple_shadow.dart';
 class MytattooTilt extends StatefulWidget {
   const MytattooTilt({Key? key, required this.tattooData}) : super(key: key);
 
-  final Future<Tattoo> tattooData;
+  final Tattoo tattooData;
 
   @override
   _MytattooTiltState createState() => _MytattooTiltState();
@@ -14,10 +14,17 @@ class MytattooTilt extends StatefulWidget {
 class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMixin {
   late AnimationController _controller1, _controller2;
   late Animation<double> _animation1, _animation2;
+  var isNotNull = false;
 
   @override
   void initState() {
     super.initState();
+
+    if (widget.tattooData != null) {
+      setState(() {
+        isNotNull = true;
+      });
+    }
 
     _controller1 = AnimationController(
       vsync: this,
@@ -38,7 +45,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
 
     _animation2 = Tween<double>(
       begin: 0,
-      end: 200.0,
+      end: 180.0,
     ).animate(_controller2);
 
     _controller2.forward();
@@ -53,11 +60,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Tattoo>(
-      future: widget.tattooData,
-      builder: (context, snapshot) {
-        Tattoo tattoo = snapshot.data!;
-        return Container(
+    return !isNotNull ? Container() : Container(
           child: AnimatedBuilder(
             animation: _animation1,
             builder: (context, child) {
@@ -67,7 +70,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                     transform: Matrix4.identity()
                       ..setEntry(3, 2, 0.001)
                       ..rotateY(_animation1.value),
-                    child: Image.network(tattoo.scarImage),
+                    child: Image.network(widget.tattooData.scarImage, width: 130),
                   ),
                   Transform(
                     transform: Matrix4.identity()
@@ -83,7 +86,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                             opacity: 1,
                             sigma: 5,
                             offset: const Offset(0, 0),
-                            child: Image.network(tattoo.segmentImage),
+                            child: Image.network(widget.tattooData.segmentImage, width: 130),
                           ),
                         );
                       },
@@ -94,7 +97,5 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
             },
           ),
         );
-      },
-    );
   }
 }
