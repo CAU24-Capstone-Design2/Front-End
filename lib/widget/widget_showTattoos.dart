@@ -5,16 +5,28 @@ import 'package:scart/util/Tattoo.dart';
 
 class ShowTattoos extends StatefulWidget {
   const ShowTattoos({Key? key, required this.tattooData}) : super(key: key);
-  final Future<Tattoo> tattooData;
+  final Tattoo tattooData;
 
   @override
   _ShowTattoosState createState() => _ShowTattoosState();
 }
 
 class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin {
+  var isNotNull = false;
   final PageController pageController = PageController(
     initialPage: 0,
   );
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.tattooData != null) {
+      setState(() {
+        isNotNull = true;
+      });
+    }
+  }
 
   void downloadImage(String url) async {
     var status = await Permission.storage.status;
@@ -36,11 +48,7 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Tattoo>(
-      future: widget.tattooData,
-      builder: (context, snapshot) {
-        Tattoo tattoo = snapshot.data!;
-        return Container(
+    return !isNotNull ? Container() : Container(
           height: 250,
           child: PageView(
             controller: pageController,
@@ -48,13 +56,13 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
               Container(
                 child: Column(
                   children: [
-                    Image.network(tattoo.scarImage, height: 180,),
+                    Image.network(widget.tattooData.scarImage, height: 180,),
                     SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        downloadImage(tattoo.scarImage);
+                        downloadImage(widget.tattooData.scarImage);
                       },
                       child: Text('Download'),
                     )
@@ -64,13 +72,13 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
               Container(
                 child: Column(
                   children: [
-                    Image.asset(tattoo.segmentImage, height: 180,),
+                    Image.asset(widget.tattooData.segmentImage, height: 180,),
                     SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        downloadImage(tattoo.segmentImage);
+                        downloadImage(widget.tattooData.segmentImage);
                       },
                       child: Text('Download'),
                     )
@@ -80,13 +88,13 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
               Container(
                 child: Column(
                   children: [
-                    Image.asset(tattoo.tattooImage, height: 180,),
+                    Image.asset(widget.tattooData.tattooImage, height: 180,),
                     SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        downloadImage(tattoo.tattooImage);
+                        downloadImage(widget.tattooData.tattooImage);
                       },
                       child: Text('Download'),
                     )
@@ -96,7 +104,5 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
             ],
           ),
         );
-      },
-    );
   }
 }

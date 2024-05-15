@@ -94,8 +94,8 @@ class MyinfoState extends State<MyinfoScreen> {
     }
   }
 
-  Future<Tattoo> getTattooAllInfo() async {
-    final api = 'api/scar/' + scarId.toString() + '/getTattooAllInfo';
+  Future<bool> getTattooAllInfo(i) async {
+    final api = 'api/scar/' + scarId[i].toString() + '/getTattooAllInfo';
 
     final url = Uri.http('165.194.104.144:8888', api);
 
@@ -111,7 +111,10 @@ class MyinfoState extends State<MyinfoScreen> {
         print("********test getTattooAllInfo request********");
         print(dataMap);
 
-        return Tattoo.fromJson(dataMap);
+        setState(() {
+          futureTattoo = Tattoo.fromJson(dataMap);
+        });
+        return true;
       } else {
         print("Failed to load AllTattoo");
         throw Exception("Failed to load AllTattoo");
@@ -124,13 +127,20 @@ class MyinfoState extends State<MyinfoScreen> {
   @override
   void initState(){
     super.initState();
-    if (checkIsFirstUser() == true) {
-      setState(() {
-        isFirst = true;
+    getAllTattoo();
+    print("initState isFirst: "+ isFirst.toString());
+    if (isFirst == true) {
+      checkIsFirstUser().then((result) {
+        print("*********tescheckIsUser1234 "+result.toString());
+        if (result.toString() == "false") {
+          setState(() {
+            isFirst = false;
+            getAllTattoo();
+            print("***getfuterAllTattoo");
+            print("isFirst : "+isFirst.toString());
+          });
+        }
       });
-    } else {
-      futureAllTattoo = getAllTattoo();
-      isFirst = false;
     }
   }
 
@@ -173,25 +183,7 @@ class MyinfoState extends State<MyinfoScreen> {
                 fontSize: 17,
               )),
             ),
-          ) : FutureBuilder<List<AllTattooList>>(
-            future: futureAllTattoo,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return buildGrid(snapshot);
-              } else if (snapshot.hasError) {
-                return SizedBox(
-                  height: 140,
-                  child: Center(
-                    child: Text("[ERROR] ${snapshot.error} !", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    )),
-                  ),
-                );
-              }
-              return CircularProgressIndicator();
-            },
-          ),
+          ) : buildGrid()
         ],
       ),
     );
@@ -242,7 +234,7 @@ class MyinfoState extends State<MyinfoScreen> {
     }),
   );
 
-  Widget buildGrid(snapshot) {
+  Widget buildGrid() {
     return GridView.builder(
       physics: ScrollPhysics(),
       shrinkWrap: true,
@@ -253,29 +245,32 @@ class MyinfoState extends State<MyinfoScreen> {
             onTap: () {
               setState(() {
                 //scarId = snapshot[index].scarId;
-                futureTattoo = getTattooAllInfo();
-                print(futureTattoo);
+                scarId.add(futureAllTattoo![index].scarId);
+                getTattooAllInfo(index).then((result) {
+                  print("getTattooAllInfo result: "+ result.toString());
+                  print(futureTattoo?.scarImage.toString());
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                          ),
+                          content: ShowTattoos(tattooData: futureTattoo!), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
+                          actions: [
+                            TextButton(
+                              child: const Text('확인'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            )
+                          ],
+                        );
+                      }
+                  );
+                });
               });
-              showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)
-                      ),
-                      content: ShowTattoos(tattooData: futureTattoo), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
-                      actions: [
-                        TextButton(
-                          child: const Text('확인'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        )
-                      ],
-                    );
-                  }
-              );
             },
             child: Container(
               width: 100,
@@ -283,7 +278,7 @@ class MyinfoState extends State<MyinfoScreen> {
               margin: const EdgeInsets.all(10.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.network(snapshot[index].tattooImage.toString()),
+                child: Image.network(futureAllTattoo![index].tattooImage.toString()),
               ),
             ),
           )
