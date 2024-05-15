@@ -23,10 +23,11 @@ class MyinfoScreen extends StatefulWidget {
 
 class MyinfoState extends State<MyinfoScreen> {
   final storage = FlutterSecureStorage();
-  var scarId = 0;
+  var tattolength = 0;
+  var scarId = List.empty(growable : true);
   var isFirst = true;
-  Future<List<AllTattooList>>? futureAllTattoo;
-  late Future<Tattoo> futureTattoo;
+  List<AllTattooList>? futureAllTattoo;
+  Tattoo? futureTattoo;
 
   Future<bool> checkIsFirstUser() async {
     final url = Uri.http('165.194.104.144:8888', '/api/user/checkIsFirstUser');
@@ -35,8 +36,16 @@ class MyinfoState extends State<MyinfoScreen> {
       var appToken = await storage.read(key: 'appToken');
 
       final response = await http.get(url, headers: {'accessToken':appToken!, 'Content-Type':'application/json'});
-
       if (response.statusCode == 200) {
+        Map<String, dynamic> bodyMap = jsonDecode(response.body);
+        bool data = await bodyMap['data'];
+
+        print("tetstest data: "+data.toString());
+        if (data.toString() == "true") {
+          return false;
+        } else {
+          return true;
+        }
         return true;
       } else {
         return false;

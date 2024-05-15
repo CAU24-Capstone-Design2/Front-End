@@ -12,8 +12,8 @@ class MytattooTilt extends StatefulWidget {
 }
 
 class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMixin {
-  late AnimationController _controller1, _controller2;
-  late Animation<double> _animation1, _animation2;
+  late AnimationController _controller1, _controller2, _controller3;
+  late Animation<double> _animation1, _animation2, _animation3;
   var isNotNull = false;
 
   @override
@@ -45,16 +45,29 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
 
     _animation2 = Tween<double>(
       begin: 0,
-      end: 180.0,
+      end: 160.0,
     ).animate(_controller2);
 
     _controller2.forward();
+
+    _controller3 = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 3),
+    );
+
+    _animation3 = Tween<double>(
+      begin: 0,
+      end: 320.0,
+    ).animate(_controller3);
+
+    _controller3.forward();
   }
 
   @override
   void dispose() {
     _controller1.dispose();
     _controller2.dispose();
+    _controller3.dispose();
     super.dispose();
   }
 
@@ -87,6 +100,26 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                             sigma: 5,
                             offset: const Offset(0, 0),
                             child: Image.network(widget.tattooData.segmentImage, width: 130),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Transform(
+                    transform: Matrix4.identity()
+                      ..setEntry(3, 2, 0.001)
+                      ..rotateY(_animation1.value),
+                    child: AnimatedBuilder(
+                      animation: _animation3,
+                      builder: (context, child) {
+                        return Transform.translate(
+                          offset: Offset(_animation3.value, 0.0),
+                          child: SimpleShadow(
+                            color: Colors.cyanAccent,
+                            opacity: 1,
+                            sigma: 5,
+                            offset: const Offset(0, 0),
+                            child: Image.network(widget.tattooData.tattooImage, width: 130),
                           ),
                         );
                       },

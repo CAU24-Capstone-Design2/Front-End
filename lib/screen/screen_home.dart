@@ -23,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 class HomeState extends State<HomeScreen> {
   final storage = FlutterSecureStorage();
   var tattolength = 0;
-  var scarId = 0;
+  var scarId = List.empty(growable : true);
   var isFirst = true;
   List<AllTattooList>? futureAllTattoo;
   Tattoo? futureTattoo;
@@ -93,8 +93,8 @@ class HomeState extends State<HomeScreen> {
     }
   }
 
-  Future<bool> getTattooAllInfo() async {
-    final api = 'api/scar/' + scarId.toString() + '/getTattooAllInfo';
+  Future<bool> getTattooAllInfo(i) async {
+    final api = 'api/scar/' + scarId[i].toString() + '/getTattooAllInfo';
 
     final url = Uri.http('165.194.104.144:8888', api);
 
@@ -226,32 +226,32 @@ class HomeState extends State<HomeScreen> {
         children: [for(int i=0; i<futureAllTattoo!.length; i++) GestureDetector(
           onTap: () {
             setState(() {
-              scarId = futureAllTattoo![i].scarId;
-              getTattooAllInfo().then((result) {
+              scarId.add(futureAllTattoo![i].scarId);
+              getTattooAllInfo(i).then((result) {
                 print("getTattooAllInfo result: "+ result.toString());
                 print(futureTattoo?.scarImage.toString());
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)
+                        ),
+                        content: MytattooTilt(tattooData: futureTattoo!), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
+                        actions: [
+                          TextButton(
+                            child: const Text('확인'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      );
+                    }
+                );
               });
             });
-            showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    content: MytattooTilt(tattooData: futureTattoo!), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
-                    actions: [
-                      TextButton(
-                        child: const Text('확인'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  );
-                }
-            );
           },
           child: Container(
             width: 140,
