@@ -32,10 +32,11 @@ class _TattoostyleOneState extends State<TattoostyleOne> {
         Container(
           margin: EdgeInsets.only(left: 20, right: 20),
           child: Text(
-            '올드스쿨은 굵고 뚜렷한 외곽선, 원색 계열의 채색과 짙은 명암대비, 2차원의 선명한 이미지가 특징입니다. \n아래 예시 도안을 봐주세요!',
+            ' 올드스쿨은 굵고 뚜렷한 외곽선, 원색 계열의 \n채색과 짙은 명암대비, 2차원의 선명한 이미지가 특징입니다.  \n\n 아래 예시 도안을 봐주세요!',
             softWrap: true,
             style: TextStyle(
-                fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
           ),
         ),

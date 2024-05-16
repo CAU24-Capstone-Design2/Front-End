@@ -32,9 +32,10 @@ class _TattoostyleThreeState extends State<TattoostyleThree> {
         Container(
           margin: EdgeInsets.only(left: 20, right: 20),
           child: Text(
-            '수채화 타투는 아름답고 부드럽게 혼합된 색상을 특징으로 합니다. \n아래 예시 도안을 봐주세요!',
+            ' 수채화 타투는 아름답고 부드럽게 혼합된 색상을 특징으로 합니다. \n\n 아래 예시 도안을 봐주세요!',
             softWrap: true,
             style: TextStyle(
+              fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
           ),
