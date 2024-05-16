@@ -40,17 +40,14 @@ class MyinfoState extends State<MyinfoScreen> {
         Map<String, dynamic> bodyMap = jsonDecode(response.body);
         bool data = await bodyMap['data'];
 
-        print("tetstest data: "+data.toString());
         if (data.toString() == "true") {
           return false;
         } else {
           return true;
         }
-        return true;
       } else {
         return false;
       }
-
     } catch(e) {
       Exception(e);
       return false;
@@ -66,27 +63,18 @@ class MyinfoState extends State<MyinfoScreen> {
       final response = await http.get(url, headers: {'accessToken':appToken!, 'Content-Type':'application/json'});
 
       if (response.statusCode == 200) {
-        print("test****************1");
         Map<String, dynamic> bodyMap = jsonDecode(response.body);
-        print(bodyMap);
-        print("test****************2");
         List<dynamic> dataMap = await bodyMap['data'];
         List<AllTattooList> allTattooInfo =
         dataMap.map((dynamic item) => AllTattooList.fromJson(item)).toList();
-        print("test****************");
-        print("allTattooInfo length: "+tattolength.toString());
-        print(allTattooInfo[0].tattooImage);
 
         setState(() {
           tattolength = allTattooInfo.length;
           futureAllTattoo = allTattooInfo;
         });
 
-        print("tattoolength in allTattooInfo *************"+tattolength.toString());
-
         return true;
       } else {
-        print("Failed to load AllTattoo");
         throw Exception("Failed to load AllTattoo");
       }
     } catch(e) {
@@ -108,15 +96,11 @@ class MyinfoState extends State<MyinfoScreen> {
         Map<String, dynamic> bodyMap = jsonDecode(response.body);
         Map<String, dynamic> dataMap = await bodyMap['data'];
 
-        print("********test getTattooAllInfo request********");
-        print(dataMap);
-
         setState(() {
           futureTattoo = Tattoo.fromJson(dataMap);
         });
         return true;
       } else {
-        print("Failed to load AllTattoo");
         throw Exception("Failed to load AllTattoo");
       }
     } catch(e) {
@@ -128,16 +112,12 @@ class MyinfoState extends State<MyinfoScreen> {
   void initState(){
     super.initState();
     getAllTattoo();
-    print("initState isFirst: "+ isFirst.toString());
     if (isFirst == true) {
       checkIsFirstUser().then((result) {
-        print("*********tescheckIsUser1234 "+result.toString());
         if (result.toString() == "false") {
           setState(() {
             isFirst = false;
             getAllTattoo();
-            print("***getfuterAllTattoo");
-            print("isFirst : "+isFirst.toString());
           });
         }
       });
@@ -235,11 +215,7 @@ class MyinfoState extends State<MyinfoScreen> {
   );
 
   Widget buildGrid() {
-    print("******************buildgrids: "+tattolength.toString());
     if (tattolength > 0) {
-      print("not null***********");
-      print("futureALlTattoo in buildgrids : " +
-          futureAllTattoo![0].scarId.toString());
       return GridView.builder(
           physics: ScrollPhysics(),
           shrinkWrap: true,
@@ -252,8 +228,6 @@ class MyinfoState extends State<MyinfoScreen> {
                     //scarId = snapshot[index].scarId;
                     scarId = futureAllTattoo![index].scarId;
                     getTattooAllInfo(index).then((result) {
-                      print("getTattooAllInfo result: "+ result.toString());
-                      print(futureTattoo?.scarImage.toString());
                       showDialog(
                           context: context,
                           barrierDismissible: false,
@@ -289,7 +263,6 @@ class MyinfoState extends State<MyinfoScreen> {
               )
       );
     } else {
-      print("null***********");
       return Center(
         child: Text("사진 촬영을 통해 나만의 타투를 만들어보세요! 🤹🏻", style: TextStyle(
           fontWeight: FontWeight.bold,

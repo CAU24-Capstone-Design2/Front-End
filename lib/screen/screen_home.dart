@@ -40,13 +40,11 @@ class HomeState extends State<HomeScreen> {
         Map<String, dynamic> bodyMap = jsonDecode(response.body);
         bool data = await bodyMap['data'];
 
-        print("tetstest data: "+data.toString());
         if (data.toString() == "true") {
           return false;
         } else {
           return true;
         }
-        return true;
       } else {
         return false;
       }
@@ -66,27 +64,18 @@ class HomeState extends State<HomeScreen> {
       final response = await http.get(url, headers: {'accessToken':appToken!, 'Content-Type':'application/json'});
 
       if (response.statusCode == 200) {
-        print("test****************1");
         Map<String, dynamic> bodyMap = jsonDecode(response.body);
-        print(bodyMap);
-        print("test****************2");
         List<dynamic> dataMap = await bodyMap['data'];
         List<AllTattooList> allTattooInfo =
             dataMap.map((dynamic item) => AllTattooList.fromJson(item)).toList();
-        print("test****************");
-        print("allTattooInfo length: "+tattolength.toString());
-        print(allTattooInfo[0].tattooImage);
 
         setState(() {
           tattolength = allTattooInfo.length;
           futureAllTattoo = allTattooInfo;
         });
 
-        print("tattoolength in allTattooInfo *************"+tattolength.toString());
-
         return true;
       } else {
-        print("Failed to load AllTattoo");
         throw Exception("Failed to load AllTattoo");
       }
     } catch(e) {
@@ -108,15 +97,11 @@ class HomeState extends State<HomeScreen> {
         Map<String, dynamic> bodyMap = jsonDecode(response.body);
         Map<String, dynamic> dataMap = await bodyMap['data'];
 
-        print("********test getTattooAllInfo request********");
-        print(dataMap);
-
         setState(() {
           futureTattoo = Tattoo.fromJson(dataMap);
         });
         return true;
       } else {
-        print("Failed to load AllTattoo");
         throw Exception("Failed to load AllTattoo");
       }
     } catch(e) {
@@ -128,16 +113,12 @@ class HomeState extends State<HomeScreen> {
   void initState(){
     super.initState();
     getAllTattoo();
-    print("initState isFirst: "+ isFirst.toString());
     if (isFirst == true) {
       checkIsFirstUser().then((result) {
-        print("*********tescheckIsUser1234 "+result.toString());
         if (result.toString() == "false") {
           setState(() {
             isFirst = false;
             getAllTattoo();
-            print("***getfuterAllTattoo");
-            print("isFirst : "+isFirst.toString());
           });
         }
       });
@@ -158,7 +139,6 @@ class HomeState extends State<HomeScreen> {
         var image = 'assets/tattoo/watercolor'+ i.toString() +'.png';
         tattooStyleImages.add(image);
       }
-
       tattooStyleImages.shuffle();
     }
   }
@@ -204,7 +184,6 @@ class HomeState extends State<HomeScreen> {
             margin: EdgeInsets.only(left: 20),
             child: GestureDetector(
               onTap: () {
-                print('스타일 보기');
                 Navigator.pushNamed(context, '/tattoostyle');
               },
               child: Text('스타일 둘러보기 >',
@@ -238,18 +217,13 @@ class HomeState extends State<HomeScreen> {
   }
 
   Widget buildTattoos() {
-    print("******************buildTattoos: "+tattolength.toString());
     if (tattolength > 0) {
-      print("not null***********");
-      print("futureALlTattoo in buildTattoos : "+futureAllTattoo![0].scarId.toString());
       return Row(
         children: [for(int i=0; i<futureAllTattoo!.length; i++) GestureDetector(
           onTap: () {
             setState(() {
               scarId = futureAllTattoo![i].scarId;
               getTattooAllInfo(i).then((result) {
-                print("getTattooAllInfo result: "+ result.toString());
-                print(futureTattoo?.scarImage.toString());
                 showDialog(
                     context: context,
                     barrierDismissible: false,
@@ -285,7 +259,6 @@ class HomeState extends State<HomeScreen> {
         )],
       );
     } else {
-      print("null***********");
       return Center(
         child: Text("사진 촬영을 통해 나만의 타투를 만들어보세요! 🤹🏻", style: TextStyle(
           fontWeight: FontWeight.bold,
