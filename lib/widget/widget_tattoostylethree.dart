@@ -2,8 +2,27 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class TattoostyleThree extends StatelessWidget {
+class TattoostyleThree extends StatefulWidget {
   const TattoostyleThree({Key? key}) : super(key: key);
+
+  @override
+  _TattoostyleThreeState createState() => _TattoostyleThreeState();
+}
+
+class _TattoostyleThreeState extends State<TattoostyleThree> {
+  var tattooStyleImages = List.empty(growable : true);
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (tattooStyleImages.isEmpty) {
+      for (int i = 1; i <= 16; i++) {
+        var image = 'assets/tattoo/watercolor' + i.toString() + '.png';
+        tattooStyleImages.add(image);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +53,7 @@ class TattoostyleThree extends StatelessWidget {
           physics: ScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemCount: 20,
+          itemCount: tattooStyleImages.length,
           itemBuilder: (context, index) =>
               Container(
                 width: 100,
@@ -42,7 +61,7 @@ class TattoostyleThree extends StatelessWidget {
                 margin: const EdgeInsets.all(10.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset('assets/tattoo/watercolor1.jpg'),
+                  child: Image.asset(tattooStyleImages[index]),
                 ),
               ),        ),
       ],
