@@ -24,7 +24,7 @@ class MyinfoScreen extends StatefulWidget {
 class MyinfoState extends State<MyinfoScreen> {
   final storage = FlutterSecureStorage();
   var tattolength = 0;
-  var scarId = List.empty(growable : true);
+  var scarId = 0;
   var isFirst = true;
   List<AllTattooList>? futureAllTattoo;
   Tattoo? futureTattoo;
@@ -95,7 +95,7 @@ class MyinfoState extends State<MyinfoScreen> {
   }
 
   Future<bool> getTattooAllInfo(i) async {
-    final api = 'api/scar/' + scarId[i].toString() + '/getTattooAllInfo';
+    final api = 'api/scar/' + scarId.toString() + '/getTattooAllInfo';
 
     final url = Uri.http('165.194.104.144:8888', api);
 
@@ -174,7 +174,7 @@ class MyinfoState extends State<MyinfoScreen> {
               ),
             ),
           ),
-          !isFirst ?
+          isFirst ?
           SizedBox(
             height: 140,
             child: Center(
@@ -235,53 +235,67 @@ class MyinfoState extends State<MyinfoScreen> {
   );
 
   Widget buildGrid() {
-    return GridView.builder(
-      physics: ScrollPhysics(),
-      shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: 20, //snapshot.length
-      itemBuilder: (context, index) =>
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                //scarId = snapshot[index].scarId;
-                scarId.add(futureAllTattoo![index].scarId);
-                getTattooAllInfo(index).then((result) {
-                  print("getTattooAllInfo result: "+ result.toString());
-                  print(futureTattoo?.scarImage.toString());
-                  showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                          ),
-                          content: ShowTattoos(tattooData: futureTattoo!), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
-                          actions: [
-                            TextButton(
-                              child: const Text('확인'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                        );
-                      }
-                  );
-                });
-              });
-            },
-            child: Container(
-              width: 100,
-              height: 100,
-              margin: const EdgeInsets.all(10.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Image.network(futureAllTattoo![index].tattooImage.toString()),
-              ),
-            ),
-          )
-    );
+    print("******************buildgrids: "+tattolength.toString());
+    if (tattolength > 0) {
+      print("not null***********");
+      print("futureALlTattoo in buildgrids : " +
+          futureAllTattoo![0].scarId.toString());
+      return GridView.builder(
+          physics: ScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemCount: tattolength, //snapshot.length
+          itemBuilder: (context, index) =>
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    //scarId = snapshot[index].scarId;
+                    scarId = futureAllTattoo![index].scarId;
+                    getTattooAllInfo(index).then((result) {
+                      print("getTattooAllInfo result: "+ result.toString());
+                      print(futureTattoo?.scarImage.toString());
+                      showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              content: ShowTattoos(tattooData: futureTattoo!), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
+                              actions: [
+                                TextButton(
+                                  child: const Text('확인'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            );
+                          }
+                      );
+                    });
+                  });
+                },
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  margin: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.network(futureAllTattoo![index].tattooImage, height: 160,),
+                  ),
+                ),
+              )
+      );
+    } else {
+      print("null***********");
+      return Center(
+        child: Text("사진 촬영을 통해 나만의 타투를 만들어보세요! 🤹🏻", style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 17,
+        )),
+      );
+    }
   }
 }

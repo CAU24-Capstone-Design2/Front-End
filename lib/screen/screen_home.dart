@@ -23,8 +23,9 @@ class HomeScreen extends StatefulWidget {
 class HomeState extends State<HomeScreen> {
   final storage = FlutterSecureStorage();
   var tattolength = 0;
-  var scarId = List.empty(growable : true);
+  var scarId = 0;
   var isFirst = true;
+  var tattooStyleImages = List.empty(growable : true);
   List<AllTattooList>? futureAllTattoo;
   Tattoo? futureTattoo;
 
@@ -94,7 +95,7 @@ class HomeState extends State<HomeScreen> {
   }
 
   Future<bool> getTattooAllInfo(i) async {
-    final api = 'api/scar/' + scarId[i].toString() + '/getTattooAllInfo';
+    final api = 'api/scar/' + scarId.toString() + '/getTattooAllInfo';
 
     final url = Uri.http('165.194.104.144:8888', api);
 
@@ -140,6 +141,25 @@ class HomeState extends State<HomeScreen> {
           });
         }
       });
+    }
+
+    if (tattooStyleImages.isEmpty) {
+      for (int i=0; i<16; i++) {
+        var image = 'assets/tattoo/oldschool'+ i.toString() +'.png';
+        tattooStyleImages.add(image);
+      }
+
+      for (int i=0; i<16; i++) {
+        var image = 'assets/tattoo/linework'+ i.toString() +'.png';
+        tattooStyleImages.add(image);
+      }
+
+      for (int i=0; i<16; i++) {
+        var image = 'assets/tattoo/watercolor'+ i.toString() +'.png';
+        tattooStyleImages.add(image);
+      }
+
+      tattooStyleImages.shuffle();
     }
   }
 
@@ -200,15 +220,15 @@ class HomeState extends State<HomeScreen> {
             physics: ScrollPhysics(),
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemCount: 20,
+            itemCount: tattooStyleImages.length,
             itemBuilder: (context, index) =>
                 Container(
-                  width: 80,
-                  height: 80,
-                  margin: const EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                      color: Color(0xffEEF4FF),
-                      borderRadius: BorderRadius.circular(10.0)
+                  width: 100,
+                  height: 100,
+                  margin: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.asset(tattooStyleImages[index], fit: BoxFit.cover),
                   ),
                 ),
           ),
@@ -226,7 +246,7 @@ class HomeState extends State<HomeScreen> {
         children: [for(int i=0; i<futureAllTattoo!.length; i++) GestureDetector(
           onTap: () {
             setState(() {
-              scarId.add(futureAllTattoo![i].scarId);
+              scarId = futureAllTattoo![i].scarId;
               getTattooAllInfo(i).then((result) {
                 print("getTattooAllInfo result: "+ result.toString());
                 print(futureTattoo?.scarImage.toString());

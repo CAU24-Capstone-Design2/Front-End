@@ -72,7 +72,7 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
               Container(
                 child: Column(
                   children: [
-                    Image.asset(widget.tattooData.segmentImage, height: 180,),
+                    Image.network(widget.tattooData.segmentImage, height: 180,),
                     SizedBox(
                       height: 20,
                     ),
@@ -88,7 +88,7 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
               Container(
                 child: Column(
                   children: [
-                    Image.asset(widget.tattooData.tattooImage, height: 180,),
+                    Image.network(widget.tattooData.tattooImage, height: 180,),
                     SizedBox(
                       height: 20,
                     ),
