@@ -144,17 +144,17 @@ class HomeState extends State<HomeScreen> {
     }
 
     if (tattooStyleImages.isEmpty) {
-      for (int i=0; i<16; i++) {
+      for (int i=1; i<=16; i++) {
         var image = 'assets/tattoo/oldschool'+ i.toString() +'.png';
         tattooStyleImages.add(image);
       }
 
-      for (int i=0; i<16; i++) {
+      for (int i=1; i<=16; i++) {
         var image = 'assets/tattoo/linework'+ i.toString() +'.png';
         tattooStyleImages.add(image);
       }
 
-      for (int i=0; i<16; i++) {
+      for (int i=1; i<=16; i++) {
         var image = 'assets/tattoo/watercolor'+ i.toString() +'.png';
         tattooStyleImages.add(image);
       }
