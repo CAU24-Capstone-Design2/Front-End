@@ -53,14 +53,14 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
       shrinkWrap: true,
       children: [
         Container(
-          height: 250,
+          height: 260,
           child: PageView(
             controller: pageController,
             children: [
               Container(
                 child: Column(
                   children: [
-                    Image.network(widget.tattooData.scarImage, height: 180,),
+                    Image.network(widget.tattooData.scarImage, height: 170,),
                     SizedBox(
                       height: 20,
                     ),
@@ -76,7 +76,7 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
               Container(
                 child: Column(
                   children: [
-                    Image.network(widget.tattooData.segmentImage, height: 180,),
+                    Image.network(widget.tattooData.segmentImage, height: 170,),
                     SizedBox(
                       height: 20,
                     ),
@@ -92,7 +92,7 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
               Container(
                 child: Column(
                   children: [
-                    Image.network(widget.tattooData.tattooImage, height: 180,),
+                    Image.network(widget.tattooData.tattooImage, height: 170,),
                     SizedBox(
                       height: 20,
                     ),
