@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:scart/util/Tattoo.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ShowTattoos extends StatefulWidget {
   const ShowTattoos({Key? key, required this.tattooData}) : super(key: key);
@@ -48,7 +49,10 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return !isNotNull ? Container() : Container(
+    return !isNotNull ? Container() : ListView(
+      shrinkWrap: true,
+      children: [
+        Container(
           height: 250,
           child: PageView(
             controller: pageController,
@@ -103,6 +107,21 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
               ),
             ],
           ),
-        );
+        ),
+        SizedBox(height: 10),
+        Center(
+          child: SmoothPageIndicator(
+            controller: pageController,
+            count: 3,
+            effect: const WormEffect(
+              dotHeight: 8,
+              dotWidth: 8,
+              type: WormType.thinUnderground,
+            ),
+          ),
+        ),
+      ],
+    )
+    ;
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -6,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:scart/widget/widget_customAppBar.dart';
 import 'package:translator/translator.dart';
 import 'package:http/http.dart' as http;
+import '../widget/widget_CameraTips.dart';
 import '../widget/widget_loading.dart';
 import '../widget/widget_multiSelectChip.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -114,14 +116,13 @@ class CameraState extends State<CameraScreen> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)
                             ),
-                            title: const Text('사진 찍을 때 Tip !'),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: <Widget>[
-                                  Text('사진은 그림자가 없는 환경에서 흉터를 잘 찍어주면 더 정확한 결과가 나와요 :)'),
-                                ],
-                              ),
-                            ),
+                            title: const Text('사진 찍을 때 Tip !',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            )),
+                            content: CameraTips(),
                             actions: <Widget>[
                               TextButton(
                                 child: const Text('확인'),
