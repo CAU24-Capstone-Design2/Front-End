@@ -107,7 +107,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                         return Transform.translate(
                           offset: Offset(_animation2.value, 0.0),
                           child: SimpleShadow(
-                            color: Colors.cyanAccent,
+                            color: Colors.black54,
                             opacity: 1,
                             sigma: 5,
                             offset: const Offset(0, 0),
@@ -127,7 +127,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                         return Transform.translate(
                           offset: Offset(_animation3.value, 0.0),
                           child: SimpleShadow(
-                            color: Colors.cyanAccent,
+                            color: Colors.black54,
                             opacity: 1,
                             sigma: 5,
                             offset: const Offset(0, 0),
