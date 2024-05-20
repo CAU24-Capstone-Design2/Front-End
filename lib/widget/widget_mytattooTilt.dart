@@ -28,8 +28,12 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
 
     _controller1 = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3),
-    );
+      duration: Duration(seconds: 6),
+    )..addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller1.reverse();
+      }
+    });
 
     _animation1 = Tween<double>(
       begin: 0,
@@ -37,33 +41,38 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
     ).animate(_controller1);
 
     _controller1.forward();
-    _controller1.repeat(reverse: true,);
 
     _controller2 = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3),
-    );
+      duration: Duration(seconds: 6),
+    )..addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller2.reverse();
+      }
+    });
 
     _animation2 = Tween<double>(
       begin: 0,
       end: 160.0,
     ).animate(_controller2);
 
-    _controller2.forward();
-    _controller2.repeat(reverse: true);
 
     _controller3 = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3),
-    );
+      duration: Duration(seconds: 6),
+    )..addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller3.reverse();
+      }
+    });
 
     _animation3 = Tween<double>(
       begin: 0,
       end: 320.0,
     ).animate(_controller3);
+    _controller2.forward();
 
     _controller3.forward();
-    _controller3.repeat(reverse: true);
   }
 
   @override

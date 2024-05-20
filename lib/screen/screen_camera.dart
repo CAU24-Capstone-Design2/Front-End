@@ -47,7 +47,7 @@ class CameraState extends State<CameraScreen> {
   }
 
   Future<bool> requestTattto() async {
-    final url = Uri.http('165.194.104.144:8888', '/api/scar/requestTattoo');
+    final url = Uri.http('165.194.104.133:8888', '/api/scar/requestTattoo'); //165.194.104.144:8888 cvmlserver4
 
     try {
       setState(() {

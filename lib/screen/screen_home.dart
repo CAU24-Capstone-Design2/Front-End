@@ -30,7 +30,7 @@ class HomeState extends State<HomeScreen> {
   Tattoo? futureTattoo;
 
   Future<bool> checkIsFirstUser() async {
-    final url = Uri.http('165.194.104.144:8888', '/api/user/checkIsFirstUser');
+    final url = Uri.http('165.194.104.133:8888', '/api/user/checkIsFirstUser'); //165.194.104.144:8888 cvmlserver4
 
     try {
       var appToken = await storage.read(key: 'appToken');
@@ -56,7 +56,7 @@ class HomeState extends State<HomeScreen> {
   }
 
   Future<bool> getAllTattoo() async {
-    final url = Uri.http('165.194.104.144:8888', '/api/scar/getAllTattoo');
+    final url = Uri.http('165.194.104.133:8888', '/api/scar/getAllTattoo'); //165.194.104.144:8888 cvmlserver4
 
     try {
       var appToken = await storage.read(key: 'appToken');
@@ -86,7 +86,7 @@ class HomeState extends State<HomeScreen> {
   Future<bool> getTattooAllInfo(i) async {
     final api = 'api/scar/' + scarId.toString() + '/getTattooAllInfo';
 
-    final url = Uri.http('165.194.104.144:8888', api);
+    final url = Uri.http('165.194.104.133:8888', api); //165.194.104.144:8888 cvmlserver4
 
     try {
       var appToken = await storage.read(key: 'appToken');
