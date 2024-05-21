@@ -57,38 +57,38 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
           child: PageView(
             controller: pageController,
             children: [
-              Container(
-                child: Column(
-                  children: [
-                    Image.network(widget.tattooData.scarImage, height: 170,),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        downloadImage(widget.tattooData.scarImage);
-                      },
-                      child: Text('Download'),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    Image.network(widget.tattooData.segmentImage, height: 170,),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        downloadImage(widget.tattooData.segmentImage);
-                      },
-                      child: Text('Download'),
-                    )
-                  ],
-                ),
-              ),
+              // Container(
+              //  child: Column(
+              //     children: [
+              //       Image.network(widget.tattooData.scarImage, height: 170,),
+              //       SizedBox(
+              //         height: 20,
+              //       ),
+              //       ElevatedButton(
+              //         onPressed: () {
+              //           downloadImage(widget.tattooData.scarImage);
+              //         },
+              //         child: Text('Download'),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              // Container(
+              //   child: Column(
+              //     children: [
+              //       Image.network(widget.tattooData.segmentImage, height: 170,),
+              //       SizedBox(
+              //         height: 20,
+              //       ),
+              //       ElevatedButton(
+              //         onPressed: () {
+              //           downloadImage(widget.tattooData.segmentImage);
+              //         },
+              //         child: Text('Download'),
+              //       )
+              //     ],
+              //   ),
+              // ),
               Container(
                 child: Column(
                   children: [
@@ -109,17 +109,17 @@ class _ShowTattoosState extends State<ShowTattoos> with TickerProviderStateMixin
           ),
         ),
         SizedBox(height: 10),
-        Center(
-          child: SmoothPageIndicator(
-            controller: pageController,
-            count: 3,
-            effect: const WormEffect(
-              dotHeight: 8,
-              dotWidth: 8,
-              type: WormType.thinUnderground,
-            ),
-          ),
-        ),
+        // Center(
+        //   child: SmoothPageIndicator(
+        //     controller: pageController,
+        //     count: 3,
+        //     effect: const WormEffect(
+        //       dotHeight: 8,
+        //       dotWidth: 8,
+        //       type: WormType.thinUnderground,
+        //     ),
+        //   ),
+        // ),
       ],
     )
     ;

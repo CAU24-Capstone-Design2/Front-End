@@ -5,6 +5,7 @@ import 'package:scart/screen/screen_camera.dart';
 import 'package:scart/screen/screen_home.dart';
 import 'package:scart/screen/screen_login.dart';
 import 'package:scart/screen/screen_myinfo.dart';
+import 'package:scart/screen/screen_onBoarding.dart';
 import 'package:scart/screen/screen_tattoostyle.dart';
 import 'package:scart/util/generateMaterialColor.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
@@ -48,8 +49,9 @@ class MyApp extends StatelessWidget {
           '/myinfo': (context) => MyinfoScreen(),
           '/tattoostyle': (context) => TattoostyleScreen(),
           '/login' : (context) => LoginScreen(),
+          '/onboarding' : (context) => OnBoardingScreen(),
         },
-        initialRoute: '/login', // login으로 수정하기
+        initialRoute: '/onboarding', // login으로 수정하기
         // home: MyAppPage(),
       ),
     );
