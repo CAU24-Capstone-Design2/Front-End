@@ -26,9 +26,9 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   ];
 
   final description_info = [
-    "Hospitals Near Me By Distinct",
-    "Accurate And Detailed Insights",
-    "Nearby Pharmacies at a Glance",
+    "타투를 잘 몰라도 괜찮아요!\n스타일을 둘러보며\n나한테 어울리는 타투를 찾아봐요 :)",
+    "촬영 한 번으로 원하는 타투를\n손쉽게 생성할 수 있어요!",
+    "시뮬레이션을 통해\n어떤 타투가 어울리는지 \n확인해보세요!",
   ];
 
   @override
@@ -59,14 +59,14 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(width: 170.0), //text의 간격
+              SizedBox(width: 145.0), //text의 간격
               Expanded(
                 child: ValueListenableBuilder(
                   valueListenable: selectedIndex,
                   builder: (context, index, child) {
                     return Wrap(
                       spacing: 8,
-                      children: List.generate(animations.length + 1, (index) {
+                      children: List.generate(animations.length, (index) {
                         return AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
                           height: 8,
@@ -87,7 +87,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                 padding: const EdgeInsets.all(20.0),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/login');
                   },
                   child: Text(
                     (isLastPage == true)
@@ -125,18 +125,18 @@ class _PageLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
+          const SizedBox(height: 170),
           Container(
-            height: MediaQuery.of(context).size.height * 0.65,
-            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: MediaQuery.of(context).size.width *0.9,
             child: Lottie.asset(
               animation,
               fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 30),
           Text(
             title,
             style: const TextStyle(
@@ -145,14 +145,14 @@ class _PageLayout extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
           Text(
             info,
             style: const TextStyle(
               fontSize: 25,
             ),
             textAlign: TextAlign.center,
-            maxLines: 2,
+            maxLines: 3,
           ),
         ],
       ),
