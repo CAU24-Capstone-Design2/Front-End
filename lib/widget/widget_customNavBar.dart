@@ -33,7 +33,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.photo_camera),
-              label: 'Search'),
+              label: 'Camera'),
           BottomNavigationBarItem(
               icon: Icon(Icons.info),
               label: 'Mypage'),
