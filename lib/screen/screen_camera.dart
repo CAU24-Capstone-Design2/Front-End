@@ -73,10 +73,11 @@ class CameraState extends State<CameraScreen> {
 
       if (response.statusCode == 200) {
         print("타투 데이터 전송 성공!");
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/success');
         return true;
       } else {
         print("타투 데이터 전송 실패!");
+        Navigator.pushReplacementNamed(context, '/failed');
         return false;
       }
     } catch(e) {
