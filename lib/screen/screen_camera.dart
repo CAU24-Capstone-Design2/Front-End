@@ -169,7 +169,7 @@ class CameraState extends State<CameraScreen> {
                       selectedTattoostyleList = selectedList;
                     });
                   },
-                  maxSelection: 3,
+                  maxSelection: 1,
                 ),
               ],
             ),
@@ -231,28 +231,25 @@ class CameraState extends State<CameraScreen> {
                   );
                 } else {
                   final translator = GoogleTranslator();
+                    translator
+                        .translate(tattooController.text, to: 'en')
+                        .then(
+                            (result) {
+                              if (selectedTattoostyleList[0] == "올드스쿨") {
+                                tattooStyle = "oldschool";
+                              } else if (selectedTattoostyleList[0] == "라인워크") {
+                                tattooStyle = "linework";
+                              } else if (selectedTattoostyleList[0] == "수채화") {
+                                tattooStyle = "watercolor";
+                              }
 
-                  translator
-                  .translate(selectedTattoostyleList.join(','))
-                  .then((result) {
-                      print("Source: ${selectedTattoostyleList.join(',')}\nTranslated: $result");
-                      setState(() {
-                        tattooStyle = result.toString();
-                      });
-
-                      translator
-                          .translate(tattooController.text, to: 'en')
-                          .then(
-                              (result) {
-                            print("Source: ${tattooController.text}\nTranslated: $result");
-                            setState(() {
-                              tattooText = result.toString();
-                              requestTattto();
-                            });
-                          }
-                      );
-                  }
-                  );
+                              print("Source: ${tattooController.text}\nTranslated: $result");
+                              setState(() {
+                                tattooText = result.toString();
+                                requestTattto();
+                              });
+                        }
+                    );
                 }
               },
               icon: Row(
