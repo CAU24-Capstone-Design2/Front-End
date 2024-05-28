@@ -263,11 +263,14 @@ class MyinfoState extends State<MyinfoScreen> {
               )
       );
     } else {
-      return Center(
-        child: Text("사진 촬영을 통해 나만의 타투를 만들어보세요! 🤹🏻", style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 17,
-        )),
+      return SizedBox(
+        height: 140,
+        child: Center(
+          child: Text("사진 촬영을 통해 나만의 타투를 만들어보세요! 🤹🏻", style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          )),
+        ),
       );
     }
   }

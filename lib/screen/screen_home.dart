@@ -46,7 +46,8 @@ class HomeState extends State<HomeScreen> {
           return true;
         }
       } else {
-        return false;
+        print("checkIsFirstUser error ++++++++====");
+        return true;
       }
 
     } catch(e) {
@@ -112,16 +113,22 @@ class HomeState extends State<HomeScreen> {
   @override
   void initState(){
     super.initState();
-    getAllTattoo();
+
+    print("================ isFirst: "+isFirst.toString());
+    print("================ all tattoo: "+futureAllTattoo.toString());
+
     if (isFirst == true) {
       checkIsFirstUser().then((result) {
         if (result.toString() == "false") {
+          print("what>?>?>??>?");
           setState(() {
             isFirst = false;
             getAllTattoo();
           });
         }
       });
+    } else {
+      getAllTattoo();
     }
 
     if (tattooStyleImages.isEmpty) {
@@ -259,11 +266,14 @@ class HomeState extends State<HomeScreen> {
         )],
       );
     } else {
-      return Center(
-        child: Text("사진 촬영을 통해 나만의 타투를 만들어보세요! 🤹🏻", style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 17,
-        )),
+      return SizedBox(
+        height: 140,
+        child: Center(
+          child: Text("사진 촬영을 통해 나만의 타투를 만들어보세요! 🤹🏻", style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          )),
+        ),
       );
     }
 
