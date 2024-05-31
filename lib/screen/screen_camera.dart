@@ -29,8 +29,8 @@ class CameraState extends State<CameraScreen> {
   final tattooController = TextEditingController();
 
   List<String> tattoostyleList = [
-    "올드스쿨",
-    "라인워크",
+    "리얼리즘",
+    "네오 트레디셔널",
     "수채화",
   ];
 
@@ -235,10 +235,10 @@ class CameraState extends State<CameraScreen> {
                         .translate(tattooController.text, to: 'en')
                         .then(
                             (result) {
-                              if (selectedTattoostyleList[0] == "올드스쿨") {
-                                tattooStyle = "oldschool";
-                              } else if (selectedTattoostyleList[0] == "라인워크") {
-                                tattooStyle = "linework";
+                              if (selectedTattoostyleList[0] == "리얼리즘") {
+                                tattooStyle = "realism";
+                              } else if (selectedTattoostyleList[0] == "네오 트레디셔널") {
+                                tattooStyle = "neotraditional";
                               } else if (selectedTattoostyleList[0] == "수채화") {
                                 tattooStyle = "watercolor";
                               }

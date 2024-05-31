@@ -62,7 +62,7 @@ class _TattoostyleThreeState extends State<TattoostyleThree> {
                 margin: const EdgeInsets.all(10.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset(tattooStyleImages[index]),
+                  child: Image.asset(tattooStyleImages[index], fit: BoxFit.fill,),
                 ),
               ),        ),
       ],

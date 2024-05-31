@@ -133,12 +133,12 @@ class HomeState extends State<HomeScreen> {
 
     if (tattooStyleImages.isEmpty) {
       for (int i=1; i<=16; i++) {
-        var image = 'assets/tattoo/oldschool'+ i.toString() +'.png';
+        var image = 'assets/tattoo/realism'+ i.toString() +'.png';
         tattooStyleImages.add(image);
       }
 
       for (int i=1; i<=16; i++) {
-        var image = 'assets/tattoo/linework'+ i.toString() +'.png';
+        var image = 'assets/tattoo/neotraditional'+ i.toString() +'.png';
         tattooStyleImages.add(image);
       }
 
@@ -260,7 +260,7 @@ class HomeState extends State<HomeScreen> {
             margin: const EdgeInsets.all(10.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(futureAllTattoo![i].tattooImage, height: 160,),
+              child: Image.network(futureAllTattoo![i].tattooImage, height: 160, fit: BoxFit.fill,),
             ),
           ),
         )],

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:scart/util/Tattoo.dart';
 import 'package:simple_shadow/simple_shadow.dart';
@@ -95,7 +97,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                     transform: Matrix4.identity()
                       ..setEntry(3, 2, 0.001)
                       ..rotateY(_animation1.value),
-                    child: Image.asset('assets/scarImage.png', width: 130,)//Image.network(widget.tattooData.scarImage, width: 130),
+                    child: Image.network(widget.tattooData.scarImage, width: 130, ) //Image.network(widget.tattooData.scarImage, width: 130), Image.asset('assets/scarImage.png', width: 130,)
                   ),
                   Transform(
                     transform: Matrix4.identity()
@@ -111,7 +113,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                             opacity: 1,
                             sigma: 5,
                             offset: const Offset(0, 0),
-                            child: Image.asset('assets/maskImage.png', width: 130,)//Image.network(widget.tattooData.segmentImage, width: 130),
+                            child: Image.network(widget.tattooData.segmentImage, width: 130, ), //Image.network(widget.tattooData.segmentImage, width: 130), Image.asset('assets/maskImage.png', width: 130,)
                           ),
                         );
                       },
@@ -131,7 +133,10 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                             opacity: 1,
                             sigma: 5,
                             offset: const Offset(0, 0),
-                            child: Image.asset('assets/tattooImage.png', width: 130,)//Image.network(widget.tattooData.tattooImage, width: 130),
+                            child: Image.network(widget.tattooData.synthesisImage,
+                              color: const Color.fromRGBO(255, 255, 255, 0.75),
+                              colorBlendMode: BlendMode.modulate,
+                              width: 130,)//Image.network(widget.tattooData.tattooImage, width: 130), Image.asset('assets/tattooImage.png', width: 130,)
                           ),
                         );
                       },

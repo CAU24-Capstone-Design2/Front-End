@@ -35,14 +35,15 @@ class TattoostyleState extends State<TattoostyleScreen> {
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
+              isScrollable: true,
               indicatorWeight: 3,
               tabs: [
                 Tab(
-                  text: '올드스쿨',
+                  text: '리얼리즘',
                   height: 50,
                 ),
                 Tab(
-                  text: '라인워크',
+                  text: '네오 트레디셔널',
                   height: 50,
                 ),
                 Tab(

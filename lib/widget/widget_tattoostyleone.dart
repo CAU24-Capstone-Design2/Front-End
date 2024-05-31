@@ -18,7 +18,7 @@ class _TattoostyleOneState extends State<TattoostyleOne> {
 
     if (tattooStyleImages.isEmpty) {
       for (int i = 1; i <= 16; i++) {
-        var image = 'assets/tattoo/oldschool' + i.toString() + '.png';
+        var image = 'assets/tattoo/realism' + i.toString() + '.png';
         tattooStyleImages.add(image);
       }
     }
@@ -32,7 +32,7 @@ class _TattoostyleOneState extends State<TattoostyleOne> {
         Container(
           margin: EdgeInsets.only(left: 20, right: 20),
           child: Text(
-            ' 올드스쿨은 굵고 뚜렷한 외곽선, 원색 계열의 \n채색과 짙은 명암대비, 2차원의 선명한 이미지가 특징입니다.  \n\n 아래 예시 도안을 봐주세요!',
+            ' 리얼리즘은 사실성, 현실성을 뜻하는 말로 \n사진이나 인물, 사물의 모습을 그대로 재현하는 것을 의미합니다.  \n\n 아래 예시 도안을 봐주세요!',
             softWrap: true,
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class _TattoostyleOneState extends State<TattoostyleOne> {
             margin: const EdgeInsets.all(10.0),
             child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
-            child: Image.asset(tattooStyleImages[index]),
+            child: Image.asset(tattooStyleImages[index], fit: BoxFit.fill,),
           ),
           ),
         ),
