@@ -108,13 +108,7 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                       builder: (context, child) {
                         return Transform.translate(
                           offset: Offset(_animation2.value, 0.0),
-                          child: SimpleShadow(
-                            color: Colors.black54,
-                            opacity: 1,
-                            sigma: 5,
-                            offset: const Offset(0, 0),
-                            child: Image.network(widget.tattooData.segmentImage, width: 130, ), //Image.network(widget.tattooData.segmentImage, width: 130), Image.asset('assets/maskImage.png', width: 130,)
-                          ),
+                          child: Image.network(widget.tattooData.segmentImage, width: 130, ), //Image.network(widget.tattooData.segmentImage, width: 130), Image.asset('assets/maskImage.png', width: 130,)
                         );
                       },
                     ),
@@ -128,16 +122,10 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
                       builder: (context, child) {
                         return Transform.translate(
                           offset: Offset(_animation3.value, 0.0),
-                          child: SimpleShadow(
-                            color: Colors.black54,
-                            opacity: 1,
-                            sigma: 5,
-                            offset: const Offset(0, 0),
-                            child: Image.network(widget.tattooData.synthesisImage,
-                              color: const Color.fromRGBO(255, 255, 255, 0.75),
-                              colorBlendMode: BlendMode.modulate,
-                              width: 130,)//Image.network(widget.tattooData.tattooImage, width: 130), Image.asset('assets/tattooImage.png', width: 130,)
-                          ),
+                          child: Image.network(widget.tattooData.synthesisImage,
+                            color: const Color.fromRGBO(255, 255, 255, 0.75),
+                            colorBlendMode: BlendMode.modulate,
+                            width: 130,)//Image.network(widget.tattooData.tattooImage, width: 130), Image.asset('assets/tattooImage.png', width: 130,)
                         );
                       },
                     ),
