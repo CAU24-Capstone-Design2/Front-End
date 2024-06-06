@@ -257,7 +257,7 @@ class MyinfoState extends State<MyinfoScreen> {
                   margin: const EdgeInsets.all(10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
-                    child: Image.network(futureAllTattoo![index].tattooImage, height: 160,),
+                    child: Image.network(futureAllTattoo![index].tattooImage.replaceAll('https', 'http'), height: 160,),
                   ),
                 ),
               )

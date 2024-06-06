@@ -24,6 +24,9 @@ class _MytattooTiltState extends State<MytattooTilt> with TickerProviderStateMix
 
     if (widget.tattooData != null) {
       setState(() {
+        widget.tattooData.scarImage.replaceAll('https', 'http');
+        widget.tattooData.segmentImage.replaceAll('https', 'http');
+        widget.tattooData.synthesisImage.replaceAll('https', 'http');
         isNotNull = true;
       });
     }

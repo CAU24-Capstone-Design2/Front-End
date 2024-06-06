@@ -231,26 +231,28 @@ class HomeState extends State<HomeScreen> {
             setState(() {
               scarId = futureAllTattoo![i].scarId;
               getTattooAllInfo(i).then((result) {
-                showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)
-                        ),
-                        content: MytattooTilt(tattooData: futureTattoo!), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
-                        actions: [
-                          TextButton(
-                            child: const Text('확인'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          )
-                        ],
-                      );
-                    }
-                );
+                if (result) {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                          ),
+                          content: MytattooTilt(tattooData: futureTattoo!), // 여기다가 futureTattoo 넘겨줘서 요청보내기!!
+                          actions: [
+                            TextButton(
+                              child: const Text('확인'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            )
+                          ],
+                        );
+                      }
+                  );
+                }
               });
             });
           },
@@ -260,7 +262,7 @@ class HomeState extends State<HomeScreen> {
             margin: const EdgeInsets.all(10.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(futureAllTattoo![i].tattooImage, height: 160, fit: BoxFit.fill,),
+              child: Image.network(futureAllTattoo![i].tattooImage.replaceAll('https', 'http'), height: 160, fit: BoxFit.fill,),
             ),
           ),
         )],
